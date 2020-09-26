@@ -14,16 +14,15 @@ rows = 25;
 cols = 25;
 
 const wallWidth = '1px';
-const playerColor = 'red';
-const gridColor = 'white';
 const targetColor = 'green';
 
 let grid = [...Array(rows)].map(e => Array(cols).fill(0));
 
 const maze = document.getElementById('maze');
+const cntDisp = document.getElementById('count');
 
 createGrid();
-mazeGen();
+mazeGen(rows, cols);
 
 // ****************************** grid ********************************************* //
 
@@ -55,10 +54,10 @@ function createGrid() {
 
 //********************************* maze ***************************************//
 
-function mazeGen() {
+function mazeGen(rows, cols) {
 
 	const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
-	
+	const noCells = rows * cols;
 	
 	let mem = new Set();
 	let memIt = mem.entries();
@@ -67,14 +66,14 @@ function mazeGen() {
 
 	// let timer;
 	// timer = setInterval(() => {
-	// 	if(mem.size < rows * cols) {
+	// 	if(mem.size < noCells) {
 	// 		loop();
 	// 	} else {
 	// 		clearInterval(timer);
 	// 		document.onkeydown = play;
 	// 	}
 	// }, 0);
-	while(mem.size < rows * cols) 	loop();
+	while(mem.size < noCells) 	loop();
 
 	function loop() {
 
@@ -142,33 +141,103 @@ function mazeGen() {
 // ********************************* navigation ******************************************* //
 
 let steps = 0;
-changePlayer(0, 0, 0, 0);
+let mainPath = new Array();
+changePlayer(0, 0, 0, 0, getCell);
 
 getCell(rows - 1, cols - 1).style.backgroundColor = targetColor;
-let pX = Number(getCell(0, 0).id.split(' ')[0]);
-let pY = Number(getCell(0, 0).id.split(' ')[1]);
+let pX = 0;
+let pY = 0;
 
 const play = (ev) => {
 	if(ev.key === 'ArrowUp' && getCell(pX, pY).style.borderTopWidth === wallWidth)
-		changePlayer(pX, pY, --pX, pY);
+		changePlayer(pX, pY, --pX, pY, getCell, true);
 
 	else if(ev.key === 'ArrowDown' && getCell(pX, pY).style.borderBottomWidth === wallWidth)
-		changePlayer(pX, pY, ++pX, pY);
+		changePlayer(pX, pY, ++pX, pY, getCell, true);
 
 	else if(ev.key === 'ArrowRight' && getCell(pX, pY).style.borderRightWidth === wallWidth)
-		changePlayer(pX, pY, pX, ++pY);
+		changePlayer(pX, pY, pX, ++pY, getCell, true);
 
 	else if(ev.key === 'ArrowLeft' && getCell(pX, pY).style.borderLeftWidth === wallWidth)
-		changePlayer(pX, pY, pX, --pY);
+		changePlayer(pX, pY, pX, --pY, getCell, true);
 }
 // remove when you set the timer
 document.onkeydown = play;
 
-function changePlayer(x, y, newX, newY) {
-	document.getElementById('count').innerHTML = `Number of Steps: ${++steps}`;
+function changePlayer(x, y, newX, newY, getCell, keyIp=false) {
+	if(keyIp) {
+		steps++;
+	}
+	cntDisp.innerHTML = `${steps}`;
 	getCell(x, y).innerHTML = ``;
-	getCell(x, y).style.animationName = 'playerAnim';
+	getCell(x, y).style.animationName = 'path';
 
 	getCell(newX, newY).innerHTML = `<span class='player'/>`;
-	getCell(newX, newY).style.animationName = 'playerAnim';	
+	getCell(newX, newY).style.animationName = 'path';
+
+	mainPath.push(`${Number(newX)} ${Number(newY)}`);
+}
+
+function pathPlot(pathArr, getCell) {
+	for(let i = 0, l = pathArr.length; i < l; ++i) {
+		let x = Number(pathArr[i].split(' ')[0]);
+		let y = Number(pathArr[i].split(' ')[1]);
+		getCell(x, y).style.animationName = 'path';
+	}
+}
+
+document.getElementById('dfs').onclick = () => dfs(pX, pY, rows-1, cols-1, mainPath, grid, getCell, pathPlot, changePlayer);
+
+// ****************************************** DFS ******************************* //
+
+function dfs(pX, pY, dX, dY, mainPath, grid, getCell, pathPlot, changePlayer) {
+
+	document.onkeydown = '';
+
+	//   		   E       S       W         N
+	const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+	const destination = `${dX} ${dY}`;
+
+	let mem = new Array();  // stack
+
+	mem.push([`${pX} ${pY}`]);
+
+	let timer;
+	timer = setInterval(() => loop(), 0);
+
+	function loop() {
+		
+		let currPath = mem.pop();
+		let end = currPath[currPath.length - 1];
+		let endX = Number(end.split(' ')[0]);
+		let endY = Number(end.split(' ')[1]);
+		grid[endX][endY] = 1;
+		getCell(endX, endY).style.animationName = 'explore';
+
+		if(end === destination) {
+			clearInterval(timer);
+			mainPath = mainPath.concat(currPath);
+			pathPlot(mainPath, getCell);
+			changePlayer(pX, pY, dX, dY, getCell);
+			cntDisp.innerHTML = `${mainPath.length}`;
+			return;
+		}
+
+		let currCell = getCell(endX, endY);
+		let wallState = [currCell.style.borderRightWidth === wallWidth,
+						currCell.style.borderBottomWidth === wallWidth,
+						currCell.style.borderLeftWidth === wallWidth,
+						currCell.style.borderTopWidth === wallWidth];
+
+		for(let i = 0; i < 4; ++i) {
+			let newX = endX + dir[i][0];
+			let newY = endY + dir[i][1];
+			let inside = newX >=0 && newY >= 0 && newX < rows && newY < cols;
+			if(inside && wallState[i] && !grid[newX][newY]) {
+				currPath.push(`${newX} ${newY}`);
+				mem.push([...currPath]);
+				currPath.pop();
+			}
+		}
+	}
 }

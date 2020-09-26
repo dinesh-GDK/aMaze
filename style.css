@@ -10,19 +10,28 @@
     border-color: black;
     border-width: 5px;
 
-    animation-duration: 2s;
+    animation-duration: 0s;
     animation-fill-mode: forwards;
 }
 
 /* color: var(--mycolor)
 <sx style="--mycolor:red;"> */
 
-@keyframes playerAnim {
+@keyframes path {
     from {
         background-color: white; 
     }
     to {
         background-color: skyblue;
+    }
+}
+
+@keyframes explore {
+    from {
+        background-color: white; 
+    }
+    to {
+        background-color: yellow;
     }
 }
 
