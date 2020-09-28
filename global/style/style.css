@@ -10,7 +10,7 @@
     border-color: black;
     border-width: 5px;
 
-    animation-duration: 0s;
+    animation-duration: 0.25s;
     animation-fill-mode: forwards;
 }
 
@@ -32,6 +32,12 @@
     }
     to {
         background-color: yellow;
+    }
+}
+
+@keyframes clear {
+    to {
+        background-color: white;
     }
 }
 

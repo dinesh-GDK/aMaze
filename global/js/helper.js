@@ -67,4 +67,24 @@ function pathPlot() {
 	}
 }
 
-export {getCell, createGrid, play, changePlayer, pathPlot};
+function reset() {
+    const targetColor = 'green';
+
+    for(let i = 0; i < rows; ++i) {
+        for(let j = 0; j < cols; ++j) {
+            getCell(i, j).style.animationName = 'clear';
+            getCell(i, j).innerHTML = '';
+        }
+    }
+
+    window.pX = 0;
+    window.pY = 0;
+    window.mainPath = new Array();
+    changePlayer(0, 0, 0, 0);
+    getCell(rows - 1, cols - 1).style.backgroundColor = targetColor;
+    getCell(rows - 1, cols - 1).style.animationName = 'none';
+}
+
+
+
+export {getCell, createGrid, play, changePlayer, pathPlot, reset};

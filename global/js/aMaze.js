@@ -1,4 +1,4 @@
-import {getCell, createGrid, changePlayer} from './helper.js';
+import {getCell, createGrid, changePlayer, reset} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {dfs} from './dfs.js';
 
@@ -18,16 +18,14 @@ rows = 25;
 cols = 25;
 
 createGrid();
-
-window.mainPath = new Array();
 mazeGen(true);
 
-changePlayer(0, 0, 0, 0);
-getCell(rows - 1, cols - 1).style.backgroundColor = targetColor;
 
-window.pX = 0;
-window.pY = 0;
-
+document.getElementById('resetBtn').onclick = () => reset();
 document.getElementById('dfs').onclick = () => dfs();
+
+document.getElementById('resetBtn').click();
+
+
 
 export {rows, cols, cellDim, wallWidth};
