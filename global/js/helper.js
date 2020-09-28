@@ -8,7 +8,8 @@ function getCell(i, j) {
 
 function createGrid() {
 
-	const maze = document.getElementById('maze');
+    const maze = document.getElementById('maze');
+    maze.innerHTML = '';
 
     for(let i = 0; i < rows; ++i) {
         const maze_row = document.createElement('tr');

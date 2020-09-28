@@ -1,4 +1,4 @@
-import {getCell, createGrid, changePlayer, reset} from './helper.js';
+import {getCell, createGrid, reset} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {dfs} from './dfs.js';
 
@@ -17,15 +17,16 @@ let cols = Math.floor(window.innerWidth/cellDim) - 2;
 rows = 25;
 cols = 25;
 
-createGrid();
-mazeGen(true);
-
+document.getElementById('fullResetBtn').onclick = () => {
+    createGrid();
+    mazeGen(true);
+    reset();
+}
 
 document.getElementById('resetBtn').onclick = () => reset();
 document.getElementById('dfs').onclick = () => dfs();
 
-document.getElementById('resetBtn').click();
-
+document.getElementById('fullResetBtn').click();
 
 
 export {rows, cols, cellDim, wallWidth};
