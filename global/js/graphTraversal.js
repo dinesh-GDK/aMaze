@@ -1,4 +1,4 @@
-import {rows, cols, wallWidth} from './aMaze.js';
+import {rows, cols, wallWidth, animation} from './aMaze.js';
 import {getCell, pathPlot, changePlayer} from './helper.js';
 
 function graphTraversal(type) {
@@ -26,7 +26,7 @@ function graphTraversal(type) {
 		let endX = Number(end.split(' ')[0]);
         let endY = Number(end.split(' ')[1]);
 		grid[endX][endY] = 1;
-		getCell(endX, endY).style.animationName = 'explore';
+		getCell(endX, endY).style.animation = animation.explore;
 
 		if(end === destination) {
 			clearInterval(timer);

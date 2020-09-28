@@ -2,11 +2,16 @@ import {getCell, createGrid, reset} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';
 
-const cellDim = 25;
 const minRow = 25;
 const minCol = 38;
+const cellDim = 25;
 const wallWidth = '1px';
-const targetColor = 'green';
+const animation = {
+    explore: 'explore 0.25s forwards',
+    path: 'path 0.25s forwards',
+    clear: 'clear 0s forwards',
+    target: 'target 2s infinite'
+};
 
 let rows = Math.floor(window.innerHeight/cellDim) - 15;
 let cols = Math.floor(window.innerWidth/cellDim) - 2;
@@ -16,6 +21,8 @@ let cols = Math.floor(window.innerWidth/cellDim) - 2;
 
 rows = 25;
 cols = 25;
+
+
 
 document.getElementById('fullResetBtn').onclick = () => {
     createGrid();
@@ -30,4 +37,6 @@ document.getElementById('bfs').onclick = () => graphTraversal('bfs');
 document.getElementById('fullResetBtn').click();
 
 
-export {rows, cols, cellDim, wallWidth};
+
+
+export {rows, cols, cellDim, wallWidth, animation};

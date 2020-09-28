@@ -9,9 +9,6 @@
     border: solid;
     border-color: black;
     border-width: 5px;
-
-    animation-duration: 0.25s;
-    animation-fill-mode: forwards;
 }
 
 /* color: var(--mycolor)
@@ -38,6 +35,18 @@
 @keyframes clear {
     to {
         background-color: white;
+    }
+}
+
+@keyframes target {
+    0% {
+        background-color: lawngreen;
+    }
+    50% {
+        background-color: green;
+    }
+    100% {
+        background-color: lawngreen;
     }
 }
 
