@@ -1,7 +1,7 @@
 import {rows, cols, wallWidth} from './aMaze.js';
 import {getCell, pathPlot, changePlayer} from './helper.js';
 
-function dfs() {
+function graphTraversal(type) {
 
     document.onkeydown = '';
 
@@ -18,7 +18,10 @@ function dfs() {
 
 	function loop() {
 		
-        let currPath = mem.pop();
+		let currPath;
+		if(type === 'dfs')	currPath = mem.pop();
+		else				currPath = mem.shift();
+
 		let end = currPath[currPath.length - 1];
 		let endX = Number(end.split(' ')[0]);
         let endY = Number(end.split(' ')[1]);
@@ -52,4 +55,4 @@ function dfs() {
 	}
 }
 
-export {dfs};
+export {graphTraversal};

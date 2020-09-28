@@ -1,6 +1,6 @@
 import {getCell, createGrid, reset} from './helper.js';
 import {mazeGen} from './mazeGen.js';
-import {dfs} from './dfs.js';
+import {graphTraversal} from './graphTraversal.js';
 
 const cellDim = 25;
 const minRow = 25;
@@ -24,7 +24,8 @@ document.getElementById('fullResetBtn').onclick = () => {
 }
 
 document.getElementById('resetBtn').onclick = () => reset();
-document.getElementById('dfs').onclick = () => dfs();
+document.getElementById('dfs').onclick = () => graphTraversal('dfs');
+document.getElementById('bfs').onclick = () => graphTraversal('bfs');
 
 document.getElementById('fullResetBtn').click();
 
