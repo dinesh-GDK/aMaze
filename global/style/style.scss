@@ -1,5 +1,6 @@
 body {
-    margin: 0;
+    margin: 0px;
+    line-height: 0px;
     font-family: system-ui;
     color: white;
     background-color: rgb(205, 205, 236);
@@ -8,51 +9,91 @@ body {
 .main-container {
     display: flex;
     height: 100%;
-}
 
-.maze-container {
-    margin: auto;
-}
+    .maze-container {
+        margin: auto;
+        padding: 10px;
 
-.options-container {
-    width: 25%;
-    background-color: rgb(0, 67, 109);
-    display: flex;
-    flex-direction: column;
-}
+        #maze {
+            border-collapse: collapse;
 
-.options-container > div > p {
-    font-size: 50px;
+            .cell {
+                border: solid;
+                border-color: black;
+                border-width: 5px;
+            }
+
+            .player{
+                background-color: blue;
+                display: block;
+                height: 15px;
+                width: 15px;
+                border-radius: 50%;
+                margin: auto;    
+            }
+        }
+    }
+
+    .nav-container {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(0, 67, 109);
+    
+        .nav-heading{
+            margin-right: auto;
+            margin-left: auto;
+            font-size: 50px;
+        }
+
+        .nav-options {
+            margin-right: auto;
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+
+            div {
+                padding-top: 10px;
+                padding-right: 10px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            #count {
+                font-size: 90px;
+                margin-top: 30px;
+                margin-bottom: 50px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+        }
+    }
 }
 
 @media (max-width: 1000px) {
     .main-container {
-        display: flex;
         flex-direction: column;
-        height: 100%;
+
+        .nav-container {
+            flex-direction: row;
+            height: 8%;
+            width: 100%;
+            justify-content: space-between;
+
+            .nav-heading{
+                font-size: 35px;
+            }
+        
+            .nav-options {
+                flex-direction: row;
+
+                #count {
+                    font-size: 30px;
+                }
+            }
+        }    
     }
-
-    /* .options-container div:nth-child(2){
-        flex-direction: column;
-    } */
-    
 }
-
-#maze {
-    margin-top: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-}
-
-.cell {
-    border: solid;
-    border-color: black;
-    border-width: 5px;
-}
-
-/* color: var(--mycolor)
-<sx style="--mycolor:red;"> */
 
 @keyframes path {
     from {
@@ -88,13 +129,4 @@ body {
     100% {
         background-color: lawngreen;
     }
-}
-
-.player{
-    background-color: blue;
-    display: block;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    margin: auto;    
 }
