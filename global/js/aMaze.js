@@ -1,3 +1,4 @@
+import '../style/style.scss';
 import {getCell, createGrid, reset} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';

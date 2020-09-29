@@ -1,19 +1,39 @@
 <html lang='en'>
     <head>
         <title>aMaze</title>
+        <link rel="icon" href="data:,">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'> -->
-        <link rel='stylesheet' href='./global/style/style.css'>
+        <!-- <link rel='stylesheet' href='./global/style/style.css'> -->
     </head>
     <body>
-        <table id='maze'></table>
-        
-        <div class='container' style='display: flex; height: 20px;'>
-            <p>Number of Steps: <span id='count'>0</span></p>
-            <button id='dfs'>DFS</button>
-            <button id='bfs'>BFS</button>
-            <button id='resetBtn'>RESET</button>
-            <button id='fullResetBtn'>F RESET</button>
+
+        <div class='main-container'>
+            <div class='options-container'>
+                <div>
+                    <p>aMaze!</p>
+                </div>
+                <div>
+                    <div>
+                        <h3>Number of Steps: <span id='count'>0</span></h3>
+                    </div>
+                    <div>
+                        <button id='fullResetBtn'>F RESET</button>  
+                    </div>
+                    <div>
+                        <button id='resetBtn'>RESET</button>  
+                    </div>
+                    <div>
+                        <button id='dfs'>DFS</button>
+                    </div>
+                    <div>
+                        <button id='bfs'>BFS</button>
+                    </div>
+                </div>
+            </div>
+            <div class='maze-container'>
+                <table id='maze'></table>
+            </div>
         </div>
         
         <script src='./dist/aMaze.bundle.js'></script>

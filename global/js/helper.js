@@ -69,6 +69,7 @@ function pathPlot() {
 }
 
 // ********************************** reset *********************************** //
+
 function reset() {
     const targetColor = 'green';
 
