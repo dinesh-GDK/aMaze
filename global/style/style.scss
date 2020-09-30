@@ -12,18 +12,19 @@ body {
 button {
     border: none;
     border-radius: 4px;
-    width: 120px;
+    width: 150px;
     height: 30px;
     transition: 'width 0.25s'
 }
 
 button:hover {
-    width: 125px;
+    width: 155px;
     background-color: lightblue;
     cursor: pointer;
 }
 
 select {
+    width: 150px;
     height: 30px;
     border-radius: 4px;
 }
