@@ -3,8 +3,6 @@ import {getCell, pathPlot, changePlayer} from './helper.js';
 
 function graphTraversal(type) {
 
-    document.onkeydown = '';
-
 	const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
 	const destination = `${rows-1} ${cols-1}`;
 

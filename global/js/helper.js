@@ -71,7 +71,8 @@ function pathPlot() {
 // ********************************** reset *********************************** //
 
 function reset() {
-    const targetColor = 'green';
+
+    window.addEventListener('keydown', play);
 
     for(let i = 0; i < rows; ++i) {
         for(let j = 0; j < cols; ++j) {

@@ -18,12 +18,12 @@ function mazeGen(debug=false) {
         		loop();
         	} else {
 				clearInterval(timer);
-				window.onkeydown = play;
+				window.addEventListener('keydown', play);
         	}
         }, 0);
     } else {
         while(mem.size < noCells) 	loop();
-		window.onkeydown = play;
+			window.addEventListener('keydown', play);
     }
 
 	function loop() {

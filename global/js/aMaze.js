@@ -1,10 +1,10 @@
 import '../style/style.scss';
-import {getCell, createGrid, reset} from './helper.js';
+import {getCell, createGrid, reset, changePlayer, play} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';
 
-const minRow = 25;
-const minCol = 38;
+const minRow = 10;
+const minCol = 10;
 const cellDim = 25;
 const wallWidth = '1px';
 const animation = {
@@ -14,14 +14,14 @@ const animation = {
     target: 'target 2s infinite'
 };
 
-let rows = Math.floor(window.innerHeight/cellDim) - 15;
-let cols = Math.floor(window.innerWidth/cellDim) - 2;
+let rows = Math.floor(window.innerHeight/cellDim) -2;
+let cols = Math.floor(window.innerWidth/cellDim) - 20;
 
-// rows = rows > minRow ? rows : minRow;
-// cols = cols > minCol ? cols : minCol;
+rows = rows > minRow ? rows : minRow;
+cols = cols > minCol ? cols : minCol;
 
-rows = 25;
-cols = 25;
+// rows = 10;
+// cols = 10;
 
 
 
@@ -32,12 +32,42 @@ document.getElementById('fullResetBtn').onclick = () => {
 }
 
 document.getElementById('resetBtn').onclick = () => reset();
-document.getElementById('dfs').onclick = () => graphTraversal('dfs');
-document.getElementById('bfs').onclick = () => graphTraversal('bfs');
-
 document.getElementById('fullResetBtn').click();
 
+document.getElementById('go').onclick = () => {
 
+    let algo = document.getElementById('algo').value;
+
+    if(algo === 'Choose an Algorithm') {
+        alert('Choose an Algorithm to solve');
+    } else {
+        algoReset();
+        if(algo === 'dfs') {
+            graphTraversal('dfs');
+    
+        } else if(algo === 'bfs') {
+            graphTraversal('bfs');
+    
+        }
+    }
+
+    function algoReset() {
+        window.removeEventListener('keydown', play);
+
+        let idx = window.mainPath.indexOf(`${window.pX} ${window.pY}`);
+        window.mainPath.length = idx + 1;
+        document.getElementById('count').innerHTML = mainPath.length - 1;
+
+        getCell(rows-1, cols-1).innerHTML = ``;
+        getCell(window.pX, window.pY).innerHTML = `<span class='player'/>`;
+        for(let i = 0; i < rows; ++i) {
+            for(let j = 0; j < cols; ++j) {
+                getCell(i, j).style.animation = animation.clear;
+            }
+        }
+        getCell(rows - 1, cols - 1).style.animation = animation.target;
+    }
+}
 
 
 export {rows, cols, cellDim, wallWidth, animation};
