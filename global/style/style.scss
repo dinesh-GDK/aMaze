@@ -1,32 +1,57 @@
+$unvisited: white;
+$visited: skyblue;
+$explored: rgb(245, 245, 132);
+
+$player: blue;
+$background: rgb(205, 205, 236);
+$nav-background: rgb(0, 67, 109);
+$grid: rgb(6, 24, 36);
+
+$font: 'Comic Sans MS', cursive, sans-serif;
+
 * {
     margin: 0;
     padding: 0;
 }
 
+h3 {
+    font-family: $font;
+}
+
 body {
-    font-family: system-ui;
+    font-family: 'system-ui';
     color: white;
-    background-color: rgb(205, 205, 236);
+    background-color: $background;
 }
 
 button {
+    font-family: 'system-ui';
     border: none;
     border-radius: 4px;
-    width: 150px;
+    width: 160px;
     height: 30px;
-    transition: 'width 0.25s'
-}
+    transition: 'width 0.25s';
 
-button:hover {
-    width: 155px;
-    background-color: lightblue;
-    cursor: pointer;
+    &:hover {
+        width: 165px;
+        background-color: lightblue;
+        cursor: pointer;
+    }
 }
 
 select {
-    width: 150px;
+    font-family: $font;
+    width: 160px;
     height: 30px;
     border-radius: 4px;
+}
+
+a {
+    color: white;
+
+    &:hover {
+        color: lightgray;
+    }
 }
 
 .main-container {
@@ -42,52 +67,73 @@ select {
 
             .cell {
                 border: solid;
-                border-color: rgb(6, 24, 36);
+                border-color: $grid;
                 border-width: 5px;
-            }
-
-            .player{
-                background-color: blue;
-                display: block;
-                height: 15px;
-                width: 15px;
-                border-radius: 50%;
-                margin: auto;    
             }
         }
     }
 
-    .nav-container {
+    .sidebar {
         width: 20%;
+        background-color: $nav-background;
         display: flex;
         flex-direction: column;
-        background-color: rgb(0, 67, 109);
-    
-        .nav-heading{
-            margin-top: 50px;
-            margin-right: auto;
-            margin-left: auto;
-            font-size: 50px;
-        }
 
-        .nav-options {
-            margin-right: auto;
-            margin-left: auto;
+        .nav-container {
             display: flex;
             flex-direction: column;
+            
+        
+            .nav-heading{
+                margin-top: 10px;
+                margin-right: auto;
+                margin-left: auto;
+                font-size: 50px;
+            }
 
+            .nav-options {
+                margin-right: auto;
+                margin-left: auto;
+                display: flex;
+                flex-direction: column;
+
+                div {
+                    padding-top: 10px;
+                    padding-right: 10px;
+                    margin-right: auto;
+                    margin-left: auto;
+                }
+
+                #count {
+                    font-size: 90px;
+                    margin-right: auto;
+                    margin-left: auto;
+                }
+            }
+        }
+
+        .inst {
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        
             div {
-                padding-top: 10px;
-                padding-right: 10px;
-                margin-right: auto;
-                margin-left: auto;
+                display: flex;
+                margin-bottom: 10px;
+                margin-right: 10px;
+        
+                div {
+                    width: 25px;
+                    height: 25px;
+                }
             }
-
-            #count {
-                font-size: 90px;
-                margin-right: auto;
-                margin-left: auto;
-            }
+        
+            & div:nth-child(1) { div { animation: clear forwards; } }
+            & div:nth-child(2) { div { animation: path forwards; } }
+            & div:nth-child(3) { div { animation: path forwards; } }
+            & div:nth-child(4) { div { animation: explore forwards; } }
+            & div:nth-child(5) { div { animation: target 2s infinite; } }
         }
     }
 }
@@ -96,62 +142,75 @@ select {
     .main-container {
         flex-direction: column;
 
-        .nav-container {
+        .sidebar {
             flex-direction: row;
-            height: 8%;
-            width: 100%;
-            justify-content: space-between;
 
-            .nav-heading{
-                margin-top: 0px;
-                font-size: 35px;
-            }
-        
-            .nav-options {
+            .nav-container {
                 flex-direction: row;
+                height: 8%;
+                width: 100%;
+                justify-content: space-between;
 
-                #count {
-                    padding-top: 0px;
-                    font-size: 30px;
+                .nav-heading{
+                    margin-top: 0px;
+                    font-size: 35px;
                 }
+            
+                .nav-options {
+                    flex-direction: row;
 
-                button {
-                    border: none;
-                    border-radius: 4px;
-                    width: 100px;
-                    height: 30px;
-                }
-                
-                button:hover {
-                    background-color: lightblue;
-                    cursor: pointer;
+                    #count {
+                        padding-top: 0px;
+                        font-size: 30px;
+                    }
                 }
             }
-        }    
+        }  
     }
+
+    button {
+        border: none;
+        border-radius: 4px;
+        width: 100px;
+        height: 30px;
+
+        &:hover {
+            background-color: lightblue;
+            cursor: pointer;
+        }
+    }
+}
+
+.player{
+    background-color: $player;
+    display: block;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin: auto;    
 }
 
 @keyframes path {
     from {
-        background-color: white; 
+        background-color: $unvisited; 
     }
     to {
-        background-color: skyblue;
+        background-color: $visited;
     }
 }
 
 @keyframes explore {
     from {
-        background-color: white; 
+        background-color: $unvisited; 
     }
     to {
-        background-color: rgb(245, 245, 132);
+        background-color: $explored;
     }
 }
 
 @keyframes clear {
     to {
-        background-color: white;
+        background-color: $unvisited;
     }
 }
 
