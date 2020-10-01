@@ -14,8 +14,13 @@ const animation = {
     target: 'target 2s infinite'
 };
 
-let rows = Math.floor(window.innerHeight/cellDim) -2;
-let cols = Math.floor(window.innerWidth/cellDim) - 20;
+let rows = Math.floor(window.innerHeight/cellDim) - 2;
+let cols;
+if(window.innerWidth < 1000) {
+    cols = Math.floor(window.innerWidth/cellDim) - 4;
+} else {
+    cols = Math.floor(window.innerWidth/cellDim) - 20;
+}
 
 rows = rows > minRow ? rows : minRow;
 cols = cols > minCol ? cols : minCol;

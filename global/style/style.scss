@@ -117,6 +117,8 @@ a {
             margin-left: auto;
             margin-right: auto;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         
             div {
                 display: flex;
@@ -143,12 +145,11 @@ a {
         flex-direction: column;
 
         .sidebar {
-            flex-direction: row;
+            flex-direction: column;
+            width: 100%;
 
             .nav-container {
                 flex-direction: row;
-                height: 8%;
-                width: 100%;
                 justify-content: space-between;
 
                 .nav-heading{
@@ -165,7 +166,15 @@ a {
                     }
                 }
             }
-        }  
+
+            .inst {
+                flex-direction: row;
+            
+                div {
+                    margin-right: 10px;
+                }
+            }
+        }
     }
 
     button {
