@@ -24,11 +24,6 @@ if(window.innerWidth < 1000) {
 rows = rows > minRow ? rows : minRow;
 cols = cols > minCol ? cols : minCol;
 
-// rows = 10;
-// cols = 10;
-
-
-
 document.getElementById('fullResetBtn').onclick = () => {
     createGrid();
     mazeGen(true);

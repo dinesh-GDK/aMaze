@@ -58,6 +58,16 @@ function changePlayer(x, y, newX, newY) {
 
     window.mainPath.push(`${Number(newX)} ${Number(newY)}`);
     document.getElementById('count').innerHTML = mainPath.length - 1;
+
+    if(newX === rows-1 && newY === cols-1) {
+        window.removeEventListener('keydown', play);
+        
+        let timer = setInterval(() => {
+            alert('Target Reached');
+            clearInterval(timer);
+        }, 1000);
+        
+    }
 }
 
 function pathPlot() {
