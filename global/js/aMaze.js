@@ -1,4 +1,3 @@
-import '../style/style.scss';
 import {getCell, createGrid, reset, changePlayer, play} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';
@@ -8,8 +7,8 @@ const minCol = 10;
 const cellDim = 25;
 const wallWidth = '1px';
 const animation = {
-    explore: 'explore 0.25s forwards',
-    path: 'path 0.25s forwards',
+    explore: 'explore 0.5s forwards',
+    path: 'path 1s forwards',
     clear: 'clear 0s forwards',
     target: 'target 2s infinite'
 };

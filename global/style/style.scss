@@ -7,7 +7,7 @@ $background: rgb(205, 205, 236);
 $nav-background: rgb(0, 67, 109);
 $grid: rgb(6, 24, 36);
 
-$font: 'Comic Sans MS', cursive, sans-serif;
+$font: 'system-ui';
 
 * {
     margin: 0;
@@ -19,13 +19,15 @@ h3 {
 }
 
 body {
-    font-family: 'system-ui';
+    font-family: $font;
     color: white;
     background-color: $background;
 }
 
 button {
-    font-family: 'system-ui';
+    font-family: $font;
+    
+    font-size: 15px;
     border: none;
     border-radius: 4px;
     width: 160px;
