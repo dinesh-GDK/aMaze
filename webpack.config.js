@@ -7,7 +7,7 @@ module.exports = {
   ],
   output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'aMaze.bundle.js'
+      filename: 'bundle.js'
   },
   watch: true,
   resolve : {
@@ -29,7 +29,7 @@ module.exports = {
         use: [
             {
               loader: 'file-loader',
-              options: {name: 'aMaze.bundle.css'}
+              options: {name: 'bundle.css'}
             },
             'sass-loader'
         ]
