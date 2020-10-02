@@ -1,4 +1,4 @@
-import {getCell, createGrid, reset, changePlayer, play} from './helper.js';
+import {getCell, createGrid, reset, play} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';
 
@@ -25,9 +25,10 @@ rows = rows > minRow ? rows : minRow;
 cols = cols > minCol ? cols : minCol;
 
 document.getElementById('fullResetBtn').onclick = () => {
+    document.querySelectorAll('button').forEach(elem => { elem.disabled = true; });
     createGrid();
-    mazeGen(true);
-    reset();
+    // mazeGen(true);
+    mazeGen();
 }
 
 document.getElementById('resetBtn').onclick = () => reset();
@@ -46,7 +47,6 @@ document.getElementById('go').onclick = () => {
     
         } else if(algo === 'bfs') {
             graphTraversal('bfs');
-    
         }
     }
 
@@ -67,6 +67,5 @@ document.getElementById('go').onclick = () => {
         getCell(rows - 1, cols - 1).style.animation = animation.target;
     }
 }
-
 
 export {rows, cols, cellDim, wallWidth, animation};

@@ -1,7 +1,9 @@
 import {rows, cols, wallWidth} from './aMaze.js';
-import {getCell, play} from './helper.js';
+import {getCell, play, reset} from './helper.js';
 
 function mazeGen(debug=false) {
+
+	window.removeEventListener('keydown', play);
 
 	const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
 	const noCells = rows * cols;
@@ -19,11 +21,13 @@ function mazeGen(debug=false) {
         	} else {
 				clearInterval(timer);
 				window.addEventListener('keydown', play);
+				reset();
+				document.querySelectorAll('button').forEach(elem => { elem.disabled = false; });
         	}
         }, 0);
     } else {
         while(mem.size < noCells) 	loop();
-			window.addEventListener('keydown', play);
+		window.addEventListener('keydown', play);
     }
 
 	function loop() {
