@@ -99,7 +99,7 @@ li {
 #explored { animation: explore forwards; }
 #target { animation: target 2s infinite; }
 
-@media only screen and (max-width: 1000px) {
+@media (max-width: 767px) {
     .navbar {
         flex-direction: row;
         height: auto;
