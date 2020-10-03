@@ -53,7 +53,7 @@ function changePlayer(x, y, newX, newY) {
 	getCell(x, y).innerHTML = ``;
 	getCell(x, y).style.animation = animation.path;
 
-	getCell(newX, newY).innerHTML = `<span class='player'/>`;
+	getCell(newX, newY).innerHTML = `<span class='player'></span>`;
 	getCell(newX, newY).style.animation = animation.path;
 
     window.mainPath.push(`${Number(newX)} ${Number(newY)}`);

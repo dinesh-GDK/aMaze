@@ -13,13 +13,8 @@ const animation = {
     target: 'target 2s infinite'
 };
 
-let rows = Math.floor(window.innerHeight/cellDim) - 2;
-let cols;
-if(window.innerWidth < 1000) {
-    cols = Math.floor(window.innerWidth/cellDim) - 4;
-} else {
-    cols = Math.floor(window.innerWidth/cellDim) - 20;
-}
+let rows = Math.floor(window.innerHeight/cellDim) - 3;
+let cols = Math.floor(window.innerWidth/cellDim) - 20;
 
 rows = rows > minRow ? rows : minRow;
 cols = cols > minCol ? cols : minCol;
@@ -58,7 +53,7 @@ document.getElementById('go').onclick = () => {
         document.getElementById('count').innerHTML = mainPath.length - 1;
 
         getCell(rows-1, cols-1).innerHTML = ``;
-        getCell(window.pX, window.pY).innerHTML = `<span class='player'/>`;
+        getCell(window.pX, window.pY).innerHTML = `<span class='player'></span>`;
         for(let i = 0; i < rows; ++i) {
             for(let j = 0; j < cols; ++j) {
                 getCell(i, j).style.animation = animation.clear;

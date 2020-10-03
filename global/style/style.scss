@@ -9,186 +9,35 @@ $grid: rgb(6, 24, 36);
 
 $font: 'system-ui';
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
-h3 {
-    font-family: $font;
-}
-
 body {
     font-family: $font;
     color: white;
     background-color: $background;
 }
 
-.info {
-    display: flex;
-    flex-direction: column;
-}
-
 button {
-    font-family: $font;
-    font-size: 15px;
-    border: none;
-    border-radius: 4px;
-    width: 160px;
-    height: 30px;
-    transition: 'width 0.25s';
+    width: 198px;
 
     &:hover {
-        width: 165px;
-        background-color: lightblue;
-        cursor: pointer;
+        background-color: lightskyblue;
     }
-}
-
-select {
-    font-family: $font;
-    width: 160px;
-    height: 30px;
-    border-radius: 4px;
 }
 
 a {
-    color: white;
+    color: aqua;
 
     &:hover {
-        color: lightgray;
+        color: gray;
     }
 }
 
-.main-container {
-    display: flex;
-    height: 100%;
+#maze {
+    margin-top: 45px;
 
-    .maze-container {
-        margin: auto;
-        padding: 10px;
-
-        #maze {
-            border-collapse: collapse;
-
-            .cell {
-                border: solid;
-                border-color: $grid;
-                border-width: 5px;
-            }
-        }
-    }
-
-    .sidebar {
-        width: 20%;
-        background-color: $nav-background;
-        display: flex;
-        flex-direction: column;
-
-        .nav-container {
-            display: flex;
-            flex-direction: column;
-            
-        
-            .nav-heading{
-                margin-top: 10px;
-                margin-right: auto;
-                margin-left: auto;
-                font-size: 50px;
-            }
-
-            .nav-options {
-                margin-right: auto;
-                margin-left: auto;
-                display: flex;
-                flex-direction: column;
-
-                div {
-                    padding-top: 10px;
-                    padding-right: 10px;
-                    margin-right: auto;
-                    margin-left: auto;
-                }
-
-                #count {
-                    font-size: 90px;
-                    margin-right: auto;
-                    margin-left: auto;
-                }
-            }
-        }
-
-        .inst {
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-        
-            div {
-                display: flex;
-                margin-bottom: 5px;
-                margin-right: 10px;
-        
-                div {
-                    width: 25px;
-                    height: 25px;
-                }
-            }
-        
-            & div:nth-child(1) { div { animation: clear forwards; } }
-            & div:nth-child(2) { div { animation: path forwards; } }
-            & div:nth-child(3) { div { animation: path forwards; } }
-            & div:nth-child(4) { div { animation: explore forwards; } }
-            & div:nth-child(5) { div { animation: target 2s infinite; } }
-        }
-    }
-}
-
-@media (max-width: 1000px) {
-    .main-container {
-        flex-direction: column;
-
-        .sidebar {
-            flex-direction: column;
-            width: 100%;
-
-            .nav-container {
-                flex-direction: row;
-                justify-content: space-between;
-
-                .nav-heading{
-                    margin-top: 0px;
-                    font-size: 35px;
-                }
-            
-                .nav-options {
-                    flex-direction: row;
-
-                    #count {
-                        padding-top: 0px;
-                        font-size: 30px;
-                    }
-                }
-            }
-
-            .inst {
-                flex-direction: row;
-            
-                div {
-                    margin-right: 10px;
-                }
-            }
-        }
-    }
-
-    button {
-        width: 100px;
-    
-        &:hover {
-            width: 100px;
-        }
+    .cell {
+        border: solid;
+        border-color: $grid;
+        border-width: 5px;
     }
 }
 
@@ -199,6 +48,83 @@ a {
     width: 15px;
     border-radius: 50%;
     margin: auto;    
+}
+
+.navbar {
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+}
+
+.nav-head {
+    display: flex;
+    flex-direction: column;
+
+    div:nth-child(1) {
+        font-size: 40px;
+    }
+    div:nth-child(2) {
+        font-size: 20px;
+    }
+    div:nth-child(3) {
+        font-size: 80px;
+    }
+}
+
+.navbar-toggler {
+    width: 50px;
+    padding: 0%;
+    padding-top: 2px;;
+}
+
+.navigation {
+    background-color: $nav-background;
+}
+
+li {
+    display: flex;
+
+    div {
+        width: 25px;
+        height: 25px;
+    }
+
+    p {
+        margin-left: 5px;
+    }
+}
+#unvisited { animation: clear forwards; }
+#current { animation: path forwards; }
+#visited { animation: path forwards; }
+#explored { animation: explore forwards; }
+#target { animation: target 2s infinite; }
+
+@media only screen and (max-width: 1000px) {
+    .navbar {
+        flex-direction: row;
+        height: auto;
+    }
+
+    .nav-head {
+        flex-direction: row;
+        div:nth-child(1) {
+            font-size: 20px;
+        }
+        div:nth-child(2) {
+            margin-left: 20px;
+            margin-right: 10px;
+            margin-top: 5px;
+            font-size: 15px;
+        }
+        div:nth-child(3) {
+            margin-top: 5px;
+            font-size: 15px;
+        }
+    }
+
+    #maze {
+        margin-top: 15px;
+    }
 }
 
 @keyframes path {

@@ -28,6 +28,8 @@ function mazeGen(debug=false) {
     } else {
         while(mem.size < noCells) 	loop();
 		window.addEventListener('keydown', play);
+		reset();
+		document.querySelectorAll('button').forEach(elem => { elem.disabled = false; });
     }
 
 	function loop() {

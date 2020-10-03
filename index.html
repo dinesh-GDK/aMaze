@@ -1,75 +1,81 @@
+<!DOCTYPE html>
 <html lang='en'>
     <head>
         <title>aMaze</title>
         <link rel='icon' href='./global/style/icon.svg' type='image/ico'/>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+        <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous'></script>
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous'></script>
+        
         <link rel='stylesheet' href='./dist/bundle.css'>
     </head>
-    <body>
 
-        <div class='main-container'>
-            <div class='sidebar'>
-                <div class='nav-container'>
-                    <div class='nav-heading'>
-                        <p>aMaze!</p>
-                    </div>
-                    <div class='nav-options'>
-                        <div>
-                            <h3>Number of Steps</h3>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="navigation col-md-3">
+                    <nav class="navbar navbar-expand-md navbar-light">
+                        <div class='nav-head'>
+                            <div>aMaze!</div>
+                            <div>Number of Steps</div>
+                            <div id='count'>0</div>
                         </div>
-                        <div id='count'>
-                            0
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topnavbar" aria-controls="topnavbar" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div id="topnavbar" class="collapse navbar-collapse">
+                            <ul id="menu-main-menu" class="navbar-nav flex-column">
+                                <li class='nav-item mt-1'>
+                                    <button id='fullResetBtn' class='btn'>NEW MAZE</button>
+                                </li>
+                                <li class='nav-item mt-1'>
+                                    <button id='resetBtn' class='btn'>RESET MAZE</button>
+                                </li>
+                                <li class='nav-item mt-1'>
+                                    <button id='go' class='btn'>SOLVE</button>
+                                </li>
+                                <li class='nav-item mt-1'>
+                                    <select id='algo' class='btn'>
+                                        <option selected='selected'>Choose an Algorithm</option>
+                                        <option value='dfs'>Depth First Search</option>
+                                        <option value='bfs'>Breadth First Search</option>
+                                    </select>
+                                </li>
+                                <li class='nav-item mt-2'>
+                                    <div id="unvisited"></div>
+                                    <p>Unvisited block</p>
+                                </li>
+                                <li class='nav-item mt-1'>
+                                    <div id='current'><span class='player mt-1'></span></div>
+                                    <p>Current block</p>
+                                </li>
+                                <li class='nav-item mt-1'>
+                                    <div id='visited'></div>
+                                    <p>Visited block</p>
+                                </li>
+                                <li class='nav-item mt-1'>
+                                    <div id='explored'></div>
+                                    <p>Explored block</p>
+                                </li>
+                                <li class='nav-item mt-1'>
+                                    <div id='target'></div>
+                                    <p>Target</p>
+                                </li>
+                                <li class='nav-item'>Use arrow keys to play!</li>
+                                <li class='nav-item'>For more info&nbsp;<a href='https://github.com/dinesh-GDK/aMaze' target='_blank'>Click here</a>.</li>
+                            </ul>
                         </div>
-                        <div>
-                            <button id='fullResetBtn'>NEW MAZE</button>  
-                        </div>
-                        <div>
-                            <button id='resetBtn'>RESET MAZE</button>  
-                        </div>
-                        <div>
-                            <button id='go'>SOLVE</button>
-                        </div>
-                        <div>
-                            <select id='algo'>
-                                <option selected='selected'>Choose an Algorithm</option>
-                                <option value='dfs'>Depth First Search</option>
-                                <option value='bfs'>Breadth First Search</option>
-                            </select>
-                        </div>
-                    </div>                
+                    </nav>
                 </div>
-                <div class='inst'>
-                    <div>
-                        <div></div>
-                        <p>Unvisited block</p>
-                    </div>
-                    <div>
-                        <div><span class='player'></div>
-                        <p>Current Position</p>
-                    </div>
-                    <div>
-                        <div></div>
-                        <p>Visited block</p>
-                    </div>
-                    <div>
-                        <div></div>
-                        <p>Explored block</p>
-                    </div>
-                    <div>
-                        <div></div>
-                        <p>Target</p>
-                    </div>
-                    <div class='info'>
-                        <p>Use arrow keys to play!</p>
-                        <p>For more info <a href='https://github.com/dinesh-GDK/aMaze' target='_blank'>Click here</a></p>
-                    </div>
+                <div class='maze-container col-md'>
+                    <table id='maze' class='mx-auto'></table>
                 </div>
-            </div>
-            <div class='maze-container'>
-                <table id='maze'></table>
             </div>
         </div>
-        
+
         <script src='./dist/bundle.js'></script>
     </body>
 </html>
