@@ -9,7 +9,7 @@ function graphTraversal(type) {
     let grid = [...Array(rows)].map(e => Array(cols).fill(0));
     
 	let mem = new Array();  // stack
-    mem.push([`${pX} ${pY}`]);
+    mem.push([`${window.pX} ${window.pY}`]);
 
 	let timer;
 	timer = setInterval(() => loop(), 0);

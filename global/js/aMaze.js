@@ -1,6 +1,7 @@
 import {getCell, createGrid, reset, play} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';
+import {aStar} from './aStar.js';
 
 const minRow = 10;
 const minCol = 10;
@@ -16,15 +17,21 @@ const animation = {
 let rows = Math.floor(window.innerHeight/cellDim) - 3;
 let cols = Math.floor(window.innerWidth/cellDim) - 20;
 
-rows = rows > minRow ? rows : minRow;
-cols = cols > minCol ? cols : minCol;
+// rows = rows > minRow ? rows : minRow;
+// cols = cols > minCol ? cols : minCol;
+
+rows = 15;
+cols = 15;
 
 document.getElementById('fullResetBtn').onclick = () => {
     document.querySelectorAll('button').forEach(elem => { elem.disabled = true; });
     createGrid();
-    // mazeGen(true);
-    mazeGen();
+    mazeGen(true);
+    // mazeGen();
 }
+
+//////////
+aStar();
 
 document.getElementById('resetBtn').onclick = () => reset();
 document.getElementById('fullResetBtn').click();
@@ -42,6 +49,8 @@ document.getElementById('go').onclick = () => {
     
         } else if(algo === 'bfs') {
             graphTraversal('bfs');
+        } else if(algo === 'astar') {
+            aStar();
         }
     }
 
