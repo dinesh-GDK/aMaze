@@ -17,21 +17,26 @@ const animation = {
 let rows = Math.floor(window.innerHeight/cellDim) - 3;
 let cols = Math.floor(window.innerWidth/cellDim) - 20;
 
-// rows = rows > minRow ? rows : minRow;
-// cols = cols > minCol ? cols : minCol;
+rows = rows > minRow ? rows : minRow;
+cols = cols > minCol ? cols : minCol;
 
-rows = 15;
-cols = 15;
+// rows = 15;
+// cols = 15;
+
+window.pX = 0;
+window.pY = 0;
 
 document.getElementById('fullResetBtn').onclick = () => {
     document.querySelectorAll('button').forEach(elem => { elem.disabled = true; });
     createGrid();
     mazeGen(true);
+    window.pX = 0;
+    window.pY = 0;
     // mazeGen();
 }
 
 //////////
-aStar();
+// aStar();
 
 document.getElementById('resetBtn').onclick = () => reset();
 document.getElementById('fullResetBtn').click();
