@@ -35,29 +35,34 @@ function createGrid() {
 
 const play = (ev) => {
     if(ev.key === 'ArrowUp' && getCell(window.pX, window.pY).style.borderTopWidth === wallWidth) {
-        changePlayer(window.pX, window.pY, --window.pX, window.pY);
+        changePlayer(window.pX, window.pY, --window.pX, window.pY, 0, true);
         
     } else if(ev.key === 'ArrowDown' && getCell(window.pX, window.pY).style.borderBottomWidth === wallWidth) {
-        changePlayer(window.pX, window.pY, ++window.pX, window.pY);
+        changePlayer(window.pX, window.pY, ++window.pX, window.pY, 0, true);
 
     } else if(ev.key === 'ArrowRight' && getCell(window.pX, window.pY).style.borderRightWidth === wallWidth) {
-        changePlayer(window.pX, window.pY, window.pX, ++window.pY);
+        changePlayer(window.pX, window.pY, window.pX, ++window.pY, 0, true);
 
     } else if(ev.key === 'ArrowLeft' && getCell(window.pX, window.pY).style.borderLeftWidth === wallWidth) {
-        changePlayer(window.pX, window.pY, window.pX, --window.pY);
+        changePlayer(window.pX, window.pY, window.pX, --window.pY, 0, true);
     }
 }
 
-function changePlayer(x, y, newX, newY, dispValue=0) {
+function changePlayer(x, y, newX, newY, algoSteps, user=false) {
+
+    if(user) {
+        let pt = { x: newX, y: newY };
+        window.userPath.push(pt);
+    }
+    console.log(window.userPath);
 
 	getCell(x, y).innerHTML = ``;
 	getCell(x, y).style.animation = animation.path;
 
 	getCell(newX, newY).innerHTML = `<span class='player'></span>`;
-	getCell(newX, newY).style.animation = animation.path;
-
-    window.mainPath.push(`${Number(newX)} ${Number(newY)}`);
-    document.getElementById('count').innerHTML = mainPath.length - 1;
+    getCell(newX, newY).style.animation = animation.path;
+    
+    document.getElementById('count').innerHTML = window.userPath.length - 1 + algoSteps;
 
     if(newX === rows-1 && newY === cols-1) {
         window.removeEventListener('keydown', play);
@@ -70,12 +75,24 @@ function changePlayer(x, y, newX, newY, dispValue=0) {
     }
 }
 
-function pathPlot() {
-	for(let i = 0, l = window.mainPath.length; i < l; ++i) {
-		let x = Number(window.mainPath[i].split(' ')[0]);
-		let y = Number(window.mainPath[i].split(' ')[1]);
-		getCell(x, y).style.animation = animation.path;
-	}
+function plotPath(grid) {
+
+    let track = grid[rows-1][cols-1];
+    let steps = 0;
+
+    for(let i = 0, len = window.userPath.length; i < len; ++i) {
+        getCell(window.userPath[i].x, window.userPath[i].y).style.animation = animation.path;
+    }
+
+    while(track.x !== window.pX || track.y !== window.pY) {
+        getCell(track.x, track.y).style.animation = animation.path;
+        track = grid[track.source.x][track.source.y];
+        steps++;
+    }
+
+    getCell(window.pX, window.pY).style.animation = animation.path;
+    changePlayer(window.pX, window.pY, rows-1, cols-1, steps);
+    document.querySelectorAll('.btn').forEach(elem => { elem.disabled = false; });
 }
 
 // ********************************** reset *********************************** //
@@ -83,6 +100,7 @@ function pathPlot() {
 function reset() {
 
     window.addEventListener('keydown', play);
+    document.getElementById('count').innerHTML = 0;
 
     for(let i = 0; i < rows; ++i) {
         for(let j = 0; j < cols; ++j) {
@@ -93,9 +111,11 @@ function reset() {
 
     window.pX = 0;
     window.pY = 0;
-    window.mainPath = new Array();
-    changePlayer(0, 0, 0, 0);
+    window.userPath = [];
+    let pt = { x: 0, y: 0 };
+    window.userPath.push(pt);
+    changePlayer(0, 0, 0, 0, 0);
     getCell(rows - 1, cols - 1).style.animation = animation.target;
 }
 
-export {getCell, createGrid, play, changePlayer, pathPlot, reset};
+export {getCell, createGrid, play, changePlayer, plotPath, reset};

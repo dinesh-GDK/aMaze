@@ -1,5 +1,5 @@
 import {rows, cols, wallWidth, animation} from './aMaze.js';
-import {getCell, pathPlot, changePlayer} from './helper.js';
+import {getCell, changePlayer, plotPath} from './helper.js';
 
 function aStar() {
 
@@ -32,14 +32,13 @@ function aStar() {
         }
     }
 
-    const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+    const dir = [[1, 0], [0, 1], [-1, 0], [0, -1]];
     const MAX = rows*cols;
     const target = {
         x: rows-1,
         y: cols-1
     };
     
-    // elements in grid -> source of the node | graph weight | a* heuristic pre & post
     let grid = [];
     for(let i = 0; i < rows; ++i) {
         grid[i] = [];
@@ -79,22 +78,14 @@ function aStar() {
 
         if(node.x === target.x && node.y === target.y) {
             clearInterval(timer);
-            let track = grid[target.x][target.y];
-            let steps = 0;
-            while(track.x !== window.pX || track.y !== window.pY) {
-                getCell(track.x, track.y).style.animation = animation.path;
-                track = grid[track.source.x][track.source.y];
-                steps++;
-            }
-            getCell(pX, pY).style.animation = animation.path;
-            console.log(steps);
+            plotPath(grid);
             return;
         }
 
-		let wallState = [currCell.style.borderRightWidth === wallWidth,
-						currCell.style.borderBottomWidth === wallWidth,
-						currCell.style.borderLeftWidth === wallWidth,
-                        currCell.style.borderTopWidth === wallWidth];
+		let wallState = [currCell.style.borderBottomWidth === wallWidth,
+                        currCell.style.borderRightWidth === wallWidth,
+                        currCell.style.borderTopWidth === wallWidth,
+                        currCell.style.borderLeftWidth === wallWidth];
                         
         for(let i = 0; i < 4; ++i) {
             let newX = node.x + dir[i][0];
@@ -109,9 +100,6 @@ function aStar() {
             }
         }
     }
-
-    
-
 }
 
 export {aStar};

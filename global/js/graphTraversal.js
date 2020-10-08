@@ -1,53 +1,69 @@
 import {rows, cols, wallWidth, animation} from './aMaze.js';
-import {getCell, pathPlot, changePlayer} from './helper.js';
+import {getCell, changePlayer, plotPath} from './helper.js';
 
 function graphTraversal(type) {
 
-	const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
-	const destination = `${rows-1} ${cols-1}`;
+	const dir = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+	const target = {
+        x: rows-1,
+        y: cols-1
+    };
 
-    let grid = [...Array(rows)].map(e => Array(cols).fill(0));
+    let grid = [];
+    for(let i = 0; i < rows; ++i) {
+        grid[i] = [];
+        for(let j = 0; j < cols; ++j) {
+            grid[i][j] = {
+                x: i,
+                y: j,
+                visited: false,
+                source: {
+                    x: 'none',
+                    y: 'none'
+                }
+            };
+        }
+	}
+	
+	grid[window.pX][window.pY].visited = true;
+    grid[window.pX][window.pY].source.x = window.pX;
+    grid[window.pX][window.pY].source.y = window.pY;
     
 	let mem = new Array();  // stack
-    mem.push([`${window.pX} ${window.pY}`]);
+    mem.push(grid[window.pX][window.pY]);
 
 	let timer;
 	timer = setInterval(() => loop(), 0);
 
 	function loop() {
 		
-		let currPath;
-		if(type === 'dfs')	currPath = mem.pop();
-		else				currPath = mem.shift();
+		let node;
+		if(type === 'dfs')	node = mem.pop();
+		else				node = mem.shift();
 
-		let end = currPath[currPath.length - 1];
-		let endX = Number(end.split(' ')[0]);
-        let endY = Number(end.split(' ')[1]);
-		grid[endX][endY] = 1;
-		getCell(endX, endY).style.animation = animation.explore;
+		grid[node.x][node.y].visited = true;
+		let currCell = getCell(node.x, node.y);
+        currCell.style.animation = animation.explore;
 
-		if(end === destination) {
+		if(node.x === target.x && node.y === target.y) {
 			clearInterval(timer);
-			window.mainPath = window.mainPath.concat(currPath.slice(1, currPath.length-1));
-			pathPlot();
-			changePlayer(window.pX, window.pY, rows-1, cols-1);
+			plotPath(grid);
 			return;
 		}
 
-		let currCell = getCell(endX, endY);
-		let wallState = [currCell.style.borderRightWidth === wallWidth,
-						currCell.style.borderBottomWidth === wallWidth,
-						currCell.style.borderLeftWidth === wallWidth,
-						currCell.style.borderTopWidth === wallWidth];
+		let wallState = [currCell.style.borderBottomWidth === wallWidth,
+						currCell.style.borderRightWidth === wallWidth,
+						currCell.style.borderTopWidth === wallWidth,
+						currCell.style.borderLeftWidth === wallWidth];
 
 		for(let i = 0; i < 4; ++i) {
-			let newX = endX + dir[i][0];
-			let newY = endY + dir[i][1];
+			let newX = node.x + dir[i][0];
+            let newY = node.y + dir[i][1];
 			let inside = newX >=0 && newY >= 0 && newX < rows && newY < cols;
-			if(inside && wallState[i] && !grid[newX][newY]) {
-				currPath.push(`${newX} ${newY}`);
-				mem.push([...currPath]);
-				currPath.pop();
+			if(inside && wallState[i] && !grid[newX][newY].visited) {
+				grid[newX][newY].source.x = node.x;
+                grid[newX][newY].source.y = node.y;
+				mem.push(grid[newX][newY]);
 			}
 		}
 	}

@@ -22,14 +22,14 @@ function mazeGen(debug=false) {
 				clearInterval(timer);
 				window.addEventListener('keydown', play);
 				reset();
-				document.querySelectorAll('button').forEach(elem => { elem.disabled = false; });
+				document.querySelectorAll('.btn').forEach(elem => { elem.disabled = false; });
         	}
         }, 0);
     } else {
         while(mem.size < noCells) 	loop();
 		window.addEventListener('keydown', play);
 		reset();
-		document.querySelectorAll('button').forEach(elem => { elem.disabled = false; });
+		document.querySelectorAll('.btn').forEach(elem => { elem.disabled = false; });
     }
 
 	function loop() {
