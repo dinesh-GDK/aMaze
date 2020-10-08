@@ -66,20 +66,29 @@ function aStar() {
     let mem = new PriorityQueue();
     mem.enque(grid[window.pX][window.pY]);
 
-    let it = 0;
-    while(mem.length !== 0 && it < 10000) {
-        it++;
+    let timer;
+	timer = setInterval(() => loop(), 0);
+
+    function loop() {
 
         let node = mem.fetch();
-        console.log(node)
-
         grid[node.x][node.y].visited = true;
 
         let currCell = getCell(node.x, node.y);
         currCell.style.animation = animation.explore;
 
         if(node.x === target.x && node.y === target.y) {
-            break;
+            clearInterval(timer);
+            let track = grid[target.x][target.y];
+            let steps = 0;
+            while(track.x !== window.pX || track.y !== window.pY) {
+                getCell(track.x, track.y).style.animation = animation.path;
+                track = grid[track.source.x][track.source.y];
+                steps++;
+            }
+            getCell(pX, pY).style.animation = animation.path;
+            console.log(steps);
+            return;
         }
 
 		let wallState = [currCell.style.borderRightWidth === wallWidth,
@@ -96,23 +105,12 @@ function aStar() {
                 grid[newX][newY].source.y = node.y;
                 grid[newX][newY].weight = node.weight + 1;
                 grid[newX][newY].heu += node.weight;
-                let asd = Object.assign({}, grid[newX][newY]);
-                mem.enque(asd);
+                mem.enque(grid[newX][newY]);
             }
         }
     }
 
-    let node = grid[target.x][target.y];
-    // console.log(window.pX, window.pY);
-    it = 0;
-    while(node.x !== window.pX || node.y !== window.pY) {
-        // console.log(node);
-        getCell(node.x, node.y).style.animation = animation.path;
-        node = grid[node.source.x][node.source.y];
-    }
-
-
-    // console.log(grid);
+    
 
 }
 

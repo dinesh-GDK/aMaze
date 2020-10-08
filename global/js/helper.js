@@ -48,7 +48,7 @@ const play = (ev) => {
     }
 }
 
-function changePlayer(x, y, newX, newY) {
+function changePlayer(x, y, newX, newY, dispValue=0) {
 
 	getCell(x, y).innerHTML = ``;
 	getCell(x, y).style.animation = animation.path;
@@ -65,7 +65,7 @@ function changePlayer(x, y, newX, newY) {
         let timer = setInterval(() => {
             alert('Target Reached');
             clearInterval(timer);
-        }, 1000);
+        }, 500);
         
     }
 }

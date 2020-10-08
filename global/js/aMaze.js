@@ -20,8 +20,8 @@ let cols = Math.floor(window.innerWidth/cellDim) - 20;
 rows = rows > minRow ? rows : minRow;
 cols = cols > minCol ? cols : minCol;
 
-// rows = 15;
-// cols = 15;
+rows = 15;
+cols = 15;
 
 window.pX = 0;
 window.pY = 0;
