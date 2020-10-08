@@ -1,5 +1,5 @@
 import {rows, cols, wallWidth, animation} from './aMaze.js';
-import {getCell, changePlayer, plotPath} from './helper.js';
+import {getCell, plotPath} from './helper.js';
 
 function graphTraversal(type) {
 
