@@ -1,4 +1,4 @@
-import {getCell, createGrid, reset, play} from './helper.js';
+import {getCell, createGrid, reset, play, changePlayer} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';
 import {pathFinding} from './pathFinding.js';
@@ -29,8 +29,8 @@ window.pY = 0;
 document.getElementById('fullResetBtn').onclick = () => {
     document.querySelectorAll('.btn').forEach(elem => { elem.disabled = true; });
     createGrid();
-    // mazeGen(true);
-    mazeGen();
+    mazeGen(true);
+    // mazeGen();
 }
 
 document.getElementById('resetBtn').onclick = () => reset();
@@ -44,9 +44,12 @@ document.getElementById('go').onclick = () => {
         alert('Choose an Algorithm to solve');
     } else {
         
-        algoReset();
         window.removeEventListener('keydown', play);
         document.querySelectorAll('.btn').forEach(elem => { elem.disabled = true; });
+        algoReset();
+        // changePlayer(rows-1, cols-1, window.pX, window.pY);
+        getCell(rows-1, cols-1).innerHTML = ``;
+        getCell(window.pX, window.pY).innerHTML = `<span class='player'></span>`;
 
         if(algo === 'dfs') {
             graphTraversal('dfs');
