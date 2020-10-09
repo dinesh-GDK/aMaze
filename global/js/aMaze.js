@@ -1,7 +1,7 @@
 import {getCell, createGrid, reset, play} from './helper.js';
 import {mazeGen} from './mazeGen.js';
 import {graphTraversal} from './graphTraversal.js';
-import {aStar} from './aStar.js';
+import {pathFinding} from './pathFinding.js';
 
 const minRow = 10;
 const minCol = 10;
@@ -45,6 +45,7 @@ document.getElementById('go').onclick = () => {
     } else {
         
         algoReset();
+        window.removeEventListener('keydown', play);
         document.querySelectorAll('.btn').forEach(elem => { elem.disabled = true; });
 
         if(algo === 'dfs') {
@@ -53,8 +54,11 @@ document.getElementById('go').onclick = () => {
         } else if(algo === 'bfs') {
             graphTraversal('bfs');
 
-        } else if(algo === 'astar') {
-            aStar();
+        } else if(algo === 'dijkstra') {
+            pathFinding('dijkstra');
+            
+        } else {
+            pathFinding('astar');
         }
     }
 

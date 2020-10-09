@@ -1,7 +1,7 @@
 import {rows, cols, wallWidth, animation} from './aMaze.js';
 import {getCell, plotPath} from './helper.js';
 
-function aStar() {
+function pathFinding(algo) {
 
     class PriorityQueue {
 
@@ -15,7 +15,11 @@ function aStar() {
             } else {
                 let added = false;
                 for (let i = 0; i < this.entities.length; i++){
-                     if (element.heu < this.entities[i].heu) {
+                    if (algo === 'astar' && element.heu < this.entities[i].heu) {
+                        this.entities.splice(i, 0, element);
+                        added = true;
+                        break;
+                    } else if (element.weight < this.entities[i].weight) {
                         this.entities.splice(i, 0, element);
                         added = true;
                         break;
@@ -102,4 +106,4 @@ function aStar() {
     }
 }
 
-export {aStar};
+export {pathFinding};

@@ -15,7 +15,7 @@ module.exports = {
           '.js', '.scss'
       ]
   },
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
