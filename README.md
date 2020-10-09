@@ -8,8 +8,10 @@ You can access the web application [here](https://dinesh-gdk.github.io/aMaze).
 The mazes in **aMaze** are created by a modified version of **Randomized Prim's algorithm**.
 
 ## Maze Solvers
-Currently, there are two algorithms to solve mazes.
+There are four algorithms to solve mazes.
 - Depth-first search
 - Breadth-first search
+- Dijkstra's Algorithm
+- A* Search
 
 You can also see how the algorithms explore and solve the mazes. 
