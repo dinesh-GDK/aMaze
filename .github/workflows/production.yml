@@ -17,7 +17,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        
     - run: npm install
     - run: npm run webpack-production
-    - run: git add .
-    - run: git commit -m "Production ready"
+
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v5
+      with:
+        author_name: dinesh-GDK
+        author_email: dinesh.gna111@gmail.com
+        message: "Production ready"
+        add: "."
