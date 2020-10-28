@@ -28,6 +28,7 @@ window.pY = 0;
 
 document.getElementById('fullResetBtn').onclick = () => {
     document.querySelectorAll('.btn').forEach(elem => { elem.disabled = true; });
+    document.getElementById('count').innerHTML = 0;
     createGrid();
     // mazeGen(true);
     mazeGen();
