@@ -37,7 +37,7 @@ a {
     .cell {
         border: solid;
         border-color: $grid;
-        border-width: 5px;
+        border-width: 1px;
     }
 }
 
@@ -87,6 +87,7 @@ li {
     div {
         width: 25px;
         height: 25px;
+        border-radius: 5px;
     }
 
     p {

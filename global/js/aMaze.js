@@ -1,5 +1,6 @@
 import {getCell, createGrid, reset, play} from './helper.js';
 import {mazeGen} from './mazeGen.js';
+import {recursive} from './recursive.js';
 import {graphTraversal} from './graphTraversal.js';
 import {pathFinding} from './pathFinding.js';
 
@@ -31,7 +32,8 @@ document.getElementById('fullResetBtn').onclick = () => {
     document.getElementById('count').innerHTML = 0;
     createGrid();
     // mazeGen(true);
-    mazeGen();
+    // mazeGen();
+    recursive(0, 0, rows, cols);
 }
 
 document.getElementById('resetBtn').onclick = () => reset();
