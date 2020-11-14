@@ -19,17 +19,25 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime']
+            }
+          }
+        ],
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
-            {
-              loader: 'file-loader',
-              options: {name: 'bundle.css'}
-            },
-            'sass-loader'
+          {
+            loader: 'file-loader',
+            options: {name: 'bundle.css'}
+          },
+          'sass-loader'
         ]
       }
    ]

@@ -5,16 +5,23 @@
   "main": "aMaze.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack-development": "webpack --mode=development --watch=true",
-    "webpack-production": "webpack --mode=production"
+    "development": "webpack --mode=development --watch=true",
+    "production": "webpack --mode=production"
   },
   "author": "Dinesh Kumar Gnanasekaaran",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "file-loader": "^6.1.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.5"
   }
 }
