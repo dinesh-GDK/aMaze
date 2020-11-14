@@ -18,7 +18,7 @@ a {
   #maze .cell {
     border: solid;
     border-color: #061824;
-    border-width: 1px; }
+    border-width: 5px; }
 
 .player {
   background-color: blue;

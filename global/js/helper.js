@@ -118,4 +118,21 @@ function reset() {
     getCell(rows - 1, cols - 1).style.animation = animation.target;
 }
 
-export {getCell, createGrid, play, changePlayer, plotPath, reset};
+//
+
+async function border() {
+    
+    for(let i = 0; i < rows; ++i) {
+        getCell(i, 0).style.borderLeftWidth = '5px';
+        getCell(rows-1-i, cols-1).style.borderRightWidth = '5px';
+        await new Promise(r => setTimeout(r, 30));
+    }
+    
+    for(let i = 0; i < cols; ++i) {
+        getCell(0, i).style.borderTopWidth = '5px';
+        getCell(rows-1, cols-1-i).style.borderBottomWidth = '5px';
+        await new Promise(r => setTimeout(r, 30));
+    }
+}
+
+export {getCell, createGrid, play, changePlayer, plotPath, reset, border};

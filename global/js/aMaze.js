@@ -1,6 +1,7 @@
-import {getCell, createGrid, reset, play} from './helper.js';
+import {getCell, createGrid, reset, play, border} from './helper.js';
 import {mazeGen} from './mazeGen.js';
-import {recursive} from './recursive.js';
+import {recursiveDivision} from './recursiveDivision.js';
+import {kruskal} from './kruskal.js';
 import {graphTraversal} from './graphTraversal.js';
 import {pathFinding} from './pathFinding.js';
 
@@ -27,13 +28,15 @@ cols = cols > minCol ? cols : minCol;
 window.pX = 0;
 window.pY = 0;
 
-document.getElementById('fullResetBtn').onclick = () => {
+document.getElementById('fullResetBtn').onclick = async function() {
     document.querySelectorAll('.btn').forEach(elem => { elem.disabled = true; });
     document.getElementById('count').innerHTML = 0;
     createGrid();
     // mazeGen(true);
     // mazeGen();
-    recursive(0, 0, rows, cols);
+    // await border();
+    // recursiveDivision(0, 0, rows, cols);
+    kruskal(rows, cols);
 }
 
 document.getElementById('resetBtn').onclick = () => reset();
