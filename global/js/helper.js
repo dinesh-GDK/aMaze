@@ -34,16 +34,16 @@ function createGrid() {
 // ****************************** navigation ********************************** //
 
 const play = (ev) => {
-    if(ev.key === 'ArrowUp' && getCell(window.pX, window.pY).style.borderTopWidth === wallWidth) {
+    if(ev.key === 'ArrowUp' && getCell(window.pX, window.pY).style.borderTopWidth !== wallWidth) {
         changePlayer(window.pX, window.pY, --window.pX, window.pY, 0, true);
         
-    } else if(ev.key === 'ArrowDown' && getCell(window.pX, window.pY).style.borderBottomWidth === wallWidth) {
+    } else if(ev.key === 'ArrowDown' && getCell(window.pX, window.pY).style.borderBottomWidth !== wallWidth) {
         changePlayer(window.pX, window.pY, ++window.pX, window.pY, 0, true);
 
-    } else if(ev.key === 'ArrowRight' && getCell(window.pX, window.pY).style.borderRightWidth === wallWidth) {
+    } else if(ev.key === 'ArrowRight' && getCell(window.pX, window.pY).style.borderRightWidth !== wallWidth) {
         changePlayer(window.pX, window.pY, window.pX, ++window.pY, 0, true);
 
-    } else if(ev.key === 'ArrowLeft' && getCell(window.pX, window.pY).style.borderLeftWidth === wallWidth) {
+    } else if(ev.key === 'ArrowLeft' && getCell(window.pX, window.pY).style.borderLeftWidth !== wallWidth) {
         changePlayer(window.pX, window.pY, window.pX, --window.pY, 0, true);
     }
 }
@@ -118,21 +118,44 @@ function reset() {
     getCell(rows - 1, cols - 1).style.animation = animation.target;
 }
 
-//
+// **************************** grid initialization *************************** //
 
-async function border() {
+async function borderGrid() {
     
     for(let i = 0; i < rows; ++i) {
-        getCell(i, 0).style.borderLeftWidth = '5px';
-        getCell(rows-1-i, cols-1).style.borderRightWidth = '5px';
-        await new Promise(r => setTimeout(r, 30));
+        getCell(i, 0).style.borderLeftWidth = wallWidth;
+        getCell(rows-1-i, cols-1).style.borderRightWidth = wallWidth;
+        await new Promise(r => setTimeout(r, 10));
     }
     
     for(let i = 0; i < cols; ++i) {
-        getCell(0, i).style.borderTopWidth = '5px';
-        getCell(rows-1, cols-1-i).style.borderBottomWidth = '5px';
-        await new Promise(r => setTimeout(r, 30));
+        getCell(0, i).style.borderTopWidth = wallWidth;
+        getCell(rows-1, cols-1-i).style.borderBottomWidth = wallWidth;
+        await new Promise(r => setTimeout(r, 10));
     }
 }
 
-export {getCell, createGrid, play, changePlayer, plotPath, reset, border};
+async function fullGrid() {
+
+    for(let j = 0; j <= cols/2; ++j) {
+        for(let i = 0; i < rows; ++i) {
+            getCell(i, j).style.borderLeftWidth = wallWidth;
+            getCell(i, j).style.borderRightWidth = wallWidth;
+            getCell(rows-1-i, cols-1-j).style.borderLeftWidth = wallWidth;
+            getCell(rows-1-i, cols-1-j).style.borderRightWidth = wallWidth;
+            await new Promise(r => setTimeout(r, 0));
+        }
+    }
+
+    for(let j = 0; j <= rows/2; ++j) {
+        for(let i = 0; i < cols; ++i) {
+            getCell(j, i).style.borderTopWidth = wallWidth;
+            getCell(j, i).style.borderBottomWidth = wallWidth;
+            getCell(rows-1-j, cols-1-i).style.borderTopWidth = wallWidth;
+            getCell(rows-1-j, cols-1-i).style.borderBottomWidth = wallWidth;
+            await new Promise(r => setTimeout(r, 0));
+        }
+    }
+}
+
+export {getCell, createGrid, play, changePlayer, plotPath, reset, borderGrid, fullGrid};

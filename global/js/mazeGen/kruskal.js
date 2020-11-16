@@ -1,5 +1,5 @@
-import {rows, cols, wallWidth} from './aMaze.js';
-import {changePlayer, getCell, play, reset} from './helper.js';
+import {rows, cols, wallWidth} from '../aMaze.js';
+import {changePlayer, getCell, play, reset} from '../helper.js';
 
 export async function kruskal(rows, cols) {
 

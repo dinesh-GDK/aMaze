@@ -1,7 +1,7 @@
-import {rows, cols, wallWidth} from './aMaze.js';
-import {getCell, play, reset} from './helper.js';
+import {rows, cols, wallWidth} from '../aMaze.js';
+import {getCell, play, reset} from '../helper.js';
 
-function mazeGen(debug=false) {
+async function mazeGen(debug=false) {
 
 	window.removeEventListener('keydown', play);
 
@@ -35,16 +35,16 @@ function mazeGen(debug=false) {
 	function loop() {
 
 		let node;
-		if(mem.size % 9 === 0) {
-			node = getRandomItem(mem);
-		} else {
+		// if(mem.size % 9 === 0) {
+		// 	node = getRandomItem(mem);
+		// } else {
 			node = memIt.next();
 			if(node.done) {
 				memIt = mem.entries();
 				node = memIt.next();
 			}
 			node = node.value[0];
-		}
+		// }
 
 		let x = Number(node.split(' ')[0]);
 		let y = Number(node.split(' ')[1]);
@@ -79,6 +79,7 @@ function mazeGen(debug=false) {
 
 	function frontierCells(x, y) {
 		let neigh = new Set();
+		shuffle(dir);
 		for(let i = 0; i < 4; ++i) {
 			let newX = x + dir[i][0];
 			let newY = y + dir[i][1];
@@ -88,6 +89,15 @@ function mazeGen(debug=false) {
 		}
 		return neigh;
 	}
+
+	function shuffle(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
 
 	function getRandomItem(mySet) {
 		mySet = Array.from(mySet);

@@ -1,14 +1,16 @@
-import {getCell, createGrid, reset, play, border} from './helper.js';
-import {mazeGen} from './mazeGen.js';
-import {recursiveDivision} from './recursiveDivision.js';
-import {kruskal} from './kruskal.js';
-import {graphTraversal} from './graphTraversal.js';
-import {pathFinding} from './pathFinding.js';
+import {getCell, createGrid, reset, play, borderGrid, fullGrid} from './helper.js';
+import {mazeGen} from './mazeGen/mazeGen.js';
+import {recursiveDivision} from './mazeGen/recursiveDivision.js';
+import {kruskal} from './mazeGen/kruskal.js';
+import {prim} from './mazeGen/prim.js';
+import {graphTraversal} from './mazeSol/graphTraversal.js';
+import {pathFinding} from './mazeSol/pathFinding.js';
 
 const minRow = 10;
 const minCol = 10;
 const cellDim = 25;
-const wallWidth = '1px';
+const wallWidth = '5px';
+const pathWidth = '1px';
 const animation = {
     explore: 'explore 0.5s forwards',
     path: 'path 1s forwards',
@@ -31,12 +33,23 @@ window.pY = 0;
 document.getElementById('fullResetBtn').onclick = async function() {
     document.querySelectorAll('.btn').forEach(elem => { elem.disabled = true; });
     document.getElementById('count').innerHTML = 0;
+	window.removeEventListener('keydown', play);
+
     createGrid();
-    // mazeGen(true);
+    
     // mazeGen();
-    // await border();
-    // recursiveDivision(0, 0, rows, cols);
-    kruskal(rows, cols);
+    await borderGrid();
+    await recursiveDivision(0, 0, rows, cols);
+    // await fullGrid();
+    // await kruskal(rows, cols);
+    // await prim();
+    // await mazeGen(true);
+
+
+    document.querySelectorAll('.btn').forEach(elem => { elem.disabled = false; });
+    window.addEventListener('keydown', play);
+    reset();
+    
 }
 
 document.getElementById('resetBtn').onclick = () => reset();
@@ -81,4 +94,4 @@ document.getElementById('go').onclick = () => {
     }
 }
 
-export {rows, cols, cellDim, wallWidth, animation};
+export {rows, cols, cellDim, wallWidth, pathWidth, animation};

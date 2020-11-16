@@ -1,7 +1,7 @@
-import {rows, cols, wallWidth, animation} from './aMaze.js';
-import {getCell, plotPath} from './helper.js';
+import {rows, cols, wallWidth, animation} from '../aMaze.js';
+import {getCell, plotPath} from '../helper.js';
 
-function graphTraversal(type) {
+export async function graphTraversal(type) {
 
 	const dir = [[1, 0], [0, 1], [-1, 0], [0, -1]];
 	const target = {
@@ -29,13 +29,10 @@ function graphTraversal(type) {
     grid[window.pX][window.pY].source.x = window.pX;
     grid[window.pX][window.pY].source.y = window.pY;
     
-	let mem = new Array();  // stack
-    mem.push(grid[window.pX][window.pY]);
+	let mem = new Array();
+	mem.push(grid[window.pX][window.pY]);
 
-	let timer;
-	timer = setInterval(() => loop(), 0);
-
-	function loop() {
+	while(true) {
 		
 		let node;
 		if(type === 'dfs')	node = mem.pop();
@@ -46,15 +43,14 @@ function graphTraversal(type) {
         currCell.style.animation = animation.explore;
 
 		if(node.x === target.x && node.y === target.y) {
-			clearInterval(timer);
 			plotPath(grid);
 			return;
 		}
 
-		let wallState = [currCell.style.borderBottomWidth === wallWidth,
-						currCell.style.borderRightWidth === wallWidth,
-						currCell.style.borderTopWidth === wallWidth,
-						currCell.style.borderLeftWidth === wallWidth];
+		let wallState = [currCell.style.borderBottomWidth !== wallWidth,
+						currCell.style.borderRightWidth !== wallWidth,
+						currCell.style.borderTopWidth !== wallWidth,
+						currCell.style.borderLeftWidth !== wallWidth];
 
 		for(let i = 0; i < 4; ++i) {
 			let newX = node.x + dir[i][0];
@@ -66,7 +62,7 @@ function graphTraversal(type) {
 				mem.push(grid[newX][newY]);
 			}
 		}
+
+        await new Promise(r => setTimeout(r, 0));
 	}
 }
-
-export {graphTraversal};
