@@ -9,6 +9,10 @@
             'nav-options';
     }
 
+    .cell {
+        border-width: 5px;
+    }
+
     .nav-head {
         flex-direction: row;
         font-size: 5vw;
@@ -59,6 +63,7 @@
             .content {
 
                 .pop-item {
+                    line-height: 5vh;
                     font-size: 2vmax;
                 }
             }
