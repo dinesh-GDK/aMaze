@@ -2,82 +2,185 @@
 <html lang='en'>
     <head>
         <title>aMaze</title>
-        <link rel='icon' href='./global/style/icon.svg' type='image/ico'/>
+        <link rel='icon' href='./global/images/icon.svg' type='image/ico'/>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
-        <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous'></script>
-        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous'></script>
-        
+        <link rel='preconnect' href='https://fonts.gstatic.com'>
+        <link href='https://fonts.googleapis.com/css2?family=Ubuntu&display=swap' rel='stylesheet'>
         <link rel='stylesheet' href='./dist/bundle.css'>
+        <script src='./dist/bundle.js' defer></script>
     </head>
 
     <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="navigation col-md-3">
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <div class='nav-head'>
-                            <div>aMaze!</div>
-                            <div>Number of Steps</div>
-                            <div id='count'>0</div>
-                        </div>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topnavbar" aria-controls="topnavbar" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div id="topnavbar" class="collapse navbar-collapse">
-                            <ul id="menu-main-menu" class="navbar-nav flex-column">
-                                <li class='nav-item mt-1'>
-                                    <button id='fullResetBtn' class='btn'>NEW MAZE</button>
-                                </li>
-                                <li class='nav-item mt-1'>
-                                    <button id='resetBtn' class='btn'>RESET MAZE</button>
-                                </li>
-                                <li class='nav-item mt-1'>
-                                    <button id='go' class='btn'>SOLVE</button>
-                                </li>
-                                <li class='nav-item mt-1'>
-                                    <select id='algo' class='btn'>
-                                        <option selected disabled>Choose an Algorithm</option>
-                                        <option value='dfs'>Depth-First Search</option>
-                                        <option value='bfs'>Breadth-First Search</option>
-                                        <option value='dijkstra'>Dijkstra's Algorithm</option>
-                                        <option value='astar'>A* Search</option>
-                                    </select>
-                                </li>
-                                <li class='nav-item mt-2'>
-                                    <div id="unvisited"></div>
-                                    <p>Unvisited block</p>
-                                </li>
-                                <li class='nav-item mt-1'>
-                                    <div id='current'><span class='player mt-1'></span></div>
-                                    <p>Current block</p>
-                                </li>
-                                <li class='nav-item mt-1'>
-                                    <div id='visited'></div>
-                                    <p>Visited block</p>
-                                </li>
-                                <li class='nav-item mt-1'>
-                                    <div id='explored'></div>
-                                    <p>Explored block</p>
-                                </li>
-                                <li class='nav-item mt-1'>
-                                    <div id='target'></div>
-                                    <p>Target block</p>
-                                </li>
-                                <li class='nav-item'>Use arrow keys to play!</li>
-                                <li class='nav-item'>For more info&nbsp;<a href='https://github.com/dinesh-GDK/aMaze' target='_blank'>Click here</a>.</li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-                <div class='maze-container col-md'>
-                    <table id='maze' class='mx-auto'></table>
+        <div class='container'>
+            
+            <div class='nav-head'>
+                <div>aMaze!</div>
+                <div>Number of Steps</div>
+                <div id='count'>0</div>
+            </div>
+
+            <div class='nav-options'>
+                <a type='button' class='nav-item' href='#new'>New Maze</a>
+                <a type='button' class='nav-item' id='reset'>Reset Maze</a>
+                <a type='button' class='nav-item' href='#solve'>Solve Maze</a>
+                <a type='button' class='nav-item' href='#info' id='tut'>Info</a>
+            </div>
+
+            <div class='maze'>
+                <table id='maze'></table>
+            </div>
+
+        </div>
+
+        <div id='new' class='overlay'>
+            <div class='popup'>
+                <h2>Choose an algorithm to create the maze</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options'>
+                        <a type='button' class='pop-item' href='#' id='recurse'>Recursive Division</a>
+                        <a type='button' class='pop-item' href='#' id='kruskal'>Kruskal's Algorithm</a>
+                        <a type='button' class='pop-item' href='#' id='prim'>Prim's Algorithm</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <script src='./dist/bundle.js'></script>
+        <div id='solve' class='overlay'>
+            <div class='popup'>
+                <h2>Choose an algorithm to solve the maze</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options'>
+                        <a type='button' class='pop-item' href='#' id='dfs'>Depth-First Search</a>
+                        <a type='button' class='pop-item' href='#' id='bfs'>Breadth-First Search</a>
+                        <a type='button' class='pop-item' href='#' id='dijkstra'>Dijkstra's Algorithm</a>
+                        <a type='button' class='pop-item' href='#' id='astar'>A* Search</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='info' class='overlay'>
+            <div class='popup'>
+                <h2>Welcome to aMaze!</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options inst'>
+                        <p>A web app where you can create, play and solve mazes.</p>
+                        <p></p>
+                        <h2>Instructions:</h2>
+                        <ul>
+                            <li>Use arrow keys to move in the maze.</li>
+                            <li>The step counter will keep track of the number of steps taken.</li>
+                        </ul>
+                    </div>                  
+                </div>
+                <div class='pop-footer'>
+                    <a style='color:white;'>&lt;&nbsp;Prev</a>
+                    <a>1/4</a>
+                    <a type='button' href='#inst'>Next&nbsp;&gt;</a>
+                </div>
+            </div>
+        </div>
+
+        <div id='inst' class='overlay'>
+            <div class='popup'>
+                <h2>Interface</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options inst'>
+                        <table>
+                            <tr>
+                                <td>New Maze</td>
+                                <td>To select an algorithm to create a maze.</td>
+                            </tr>
+                            <tr>
+                                <td>Reset Maze</td>
+                                <td>To reset the maze.</td>
+                            </tr>
+                            <tr>
+                                <td>Solve Maze</td>
+                                <td>To select an algorithm to solve a maze.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class='pop-footer'>
+                    <a type='button' href='#info'>&lt;&nbsp;Prev</a>
+                    <a>2/4</a>
+                    <a type='button' href='#leg'>Next&nbsp;&gt;</a>
+                </div>
+            </div>
+        </div>
+
+        <div id='leg' class='overlay'>
+            <div class='popup'>
+                <h2>Legend</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options inst'>
+                        <table>
+                            <tr>
+                                <td id='unvisited'></td>
+                                <td>Unvisited block</td>
+                            </tr>
+                            <tr>
+                                <td id='current'><span class='player'></span></td>
+                                <td>Current block</td>
+                            </tr>
+                            <tr>
+                                <td id='visited'></td>
+                                <td>Visited block</td>
+                            </tr>
+                            <tr>
+                                <td id='explored'></td>
+                                <td>Explored block</td>
+                            </tr>
+                            <tr>
+                                <td id='target'></td>
+                                <td>Target block</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class='pop-footer'>
+                    <a type='button' href='#inst'>&lt;&nbsp;Prev</a>
+                    <a>3/4</a>
+                    <a type='button' href='#end'>Next&nbsp;&gt;</a>
+                </div>
+            </div>
+        </div>
+
+        <div id='end' class='overlay'>
+            <div class='popup'>
+                <h2>Have Fun!</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options inst'>
+                        <span style='margin-top:15vh;'>For source code of this project visit my <a href='https://github.com/dinesh-GDK/aMaze' target='_blank'>github</a>.</span>
+                    </div>                  
+                </div>
+                <div class='pop-footer'>
+                    <a type='button' href='#leg'>&lt;&nbsp;Prev</a>
+                    <a>4/4</a>
+                    <a style='color:white;'>Next&nbsp;&gt;</a>
+                </div>
+            </div>
+        </div>
+
+        <a type='hidden' id='tReach' href='#reachMsg'></a>
+        <div id='reachMsg' class='overlay'>
+            <div class='popup'>
+                <h2>Congratulations!</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options'>
+                        <a type='button' class='pop-item' href='#'>Maze was successfully solved</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

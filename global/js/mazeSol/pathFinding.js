@@ -1,7 +1,7 @@
-import {rows, cols, wallWidth, animation} from './aMaze.js';
-import {getCell, plotPath} from './helper.js';
+import {rows, cols, pathWidth, animation} from '../index.js';
+import {getCell, plotPath} from '../helper.js';
 
-function pathFinding(algo) {
+export async function pathFinding(algo) {
 
     class PriorityQueue {
 
@@ -69,10 +69,7 @@ function pathFinding(algo) {
     let mem = new PriorityQueue();
     mem.enque(grid[window.pX][window.pY]);
 
-    let timer;
-	timer = setInterval(() => loop(), 0);
-
-    function loop() {
+    while(true) {
 
         let node = mem.fetch();
         grid[node.x][node.y].visited = true;
@@ -81,15 +78,14 @@ function pathFinding(algo) {
         currCell.style.animation = animation.explore;
 
         if(node.x === target.x && node.y === target.y) {
-            clearInterval(timer);
             plotPath(grid);
             return;
         }
 
-		let wallState = [currCell.style.borderBottomWidth === wallWidth,
-                        currCell.style.borderRightWidth === wallWidth,
-                        currCell.style.borderTopWidth === wallWidth,
-                        currCell.style.borderLeftWidth === wallWidth];
+		let wallState = [currCell.style.borderBottomWidth === pathWidth,
+                        currCell.style.borderRightWidth === pathWidth,
+                        currCell.style.borderTopWidth === pathWidth,
+                        currCell.style.borderLeftWidth === pathWidth];
                         
         for(let i = 0; i < 4; ++i) {
             let newX = node.x + dir[i][0];
@@ -103,7 +99,7 @@ function pathFinding(algo) {
                 mem.enque(grid[newX][newY]);
             }
         }
+
+        await new Promise(r => setTimeout(r, 0));
     }
 }
-
-export {pathFinding};
