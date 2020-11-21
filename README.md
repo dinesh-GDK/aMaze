@@ -1,16 +1,19 @@
 # aMaze!
 
-**aMaze** is a web application that comprises of a maze generator as well as various maze solvers. You can create random mazes, play, and solve the mazes or you can choose an algorithm to solve the mazes for you.
+**aMaze** is a web application that comprises of a various maze generators as well as various maze solvers. You can create and solve the mazes by using the available algorithms or you can play and solve the mazes on your own.
 
 You can access the web application [here](https://dinesh-gdk.github.io/aMaze).
 
 ## Maze Generation
-The mazes in **aMaze** are created by a modified version of **Randomized Prim's algorithm**.
+There are three algorithms to craete mazez.
+- Recursive Division
+- Randomized Kruskal's Algorithm
+- Randomized Prim's Algorithm
 
 ## Maze Solvers
 There are four algorithms to solve mazes.
-- Depth-first search
-- Breadth-first search
+- Depth-first Search
+- Breadth-first Search
 - Dijkstra's Algorithm
 - A* Search
 

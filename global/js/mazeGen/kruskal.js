@@ -1,7 +1,10 @@
-import {rows, cols, wallWidth} from '../aMaze.js';
-import {changePlayer, getCell, play, reset} from '../helper.js';
+import {rows, cols, pathWidth} from '../index.js';
+import {getCell, fullGrid, borderGrid} from '../helper.js';
 
-export async function kruskal(rows, cols) {
+export async function kruskal() {
+
+    await borderGrid();
+    await fullGrid();
 
     // 0 -> right | 1 -> bottom
     const dir = [[0, 1], [1, 0]];
@@ -62,13 +65,13 @@ export async function kruskal(rows, cols) {
     function connect(pt1, pt2, dir) {
         if(dir === '0') {
             // horizontal
-            getCell(pt1.x, pt1.y).style.borderRightWidth = '1px';
-            getCell(pt2.x, pt2.y).style.borderLeftWidth = '1px';
+            getCell(pt1.x, pt1.y).style.borderRightWidth = pathWidth;
+            getCell(pt2.x, pt2.y).style.borderLeftWidth = pathWidth;
 
         } else {
             // vertical
-            getCell(pt1.x, pt1.y).style.borderBottomWidth = '1px';
-            getCell(pt2.x, pt2.y).style.borderTopWidth = '1px';
+            getCell(pt1.x, pt1.y).style.borderBottomWidth = pathWidth;
+            getCell(pt2.x, pt2.y).style.borderTopWidth = pathWidth;
 
         }
     }

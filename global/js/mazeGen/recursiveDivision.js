@@ -1,9 +1,35 @@
-import {rows, cols, wallWidth} from '../aMaze.js';
-import {getCell, play, reset} from '../helper.js';
+import {pathWidth} from '../index.js';
+import {getCell, borderGrid} from '../helper.js';
 
-export async function recursiveDivision(x1, y1, x2, y2) {
+export async function recursiveDivision(x1, y1, x2, y2, border=false) {
 
-    if(x2 - x1 < 2 || y2 - y1 < 2)      return;
+    if(border)      await borderGrid();
+
+    if(x2 - x1 < 2) {
+        for(let i = y1; i < y2-1; ++i) {
+            let c1 = getCell(x1, i).style;
+            let c2 = getCell(x1, i+1).style;
+            c1.borderRightWidth = pathWidth;
+            c1.borderRightColor = 'black';
+            c2.borderLeftWidth = pathWidth;
+            c2.borderLeftColor = 'black';
+        }
+        
+        return;
+    }
+
+    if(y2 - y1 < 2) {
+        for(let i = x1; i < x2-1; ++i) {
+            let c1 = getCell(i, y1).style;
+            let c2 = getCell(i+1, y1).style;
+            c1.borderBottomWidth = pathWidth;
+            c1.borderBottomColor = 'black';
+            c2.borderTopWidth = pathWidth;
+            c2.borderTopColor = 'black';
+        }
+        
+        return;
+    }
 
     let orientation;
     if(x2 - x1 > y2 - y1) {
@@ -20,9 +46,12 @@ export async function recursiveDivision(x1, y1, x2, y2) {
         let open  = getRandom(y1, y2-1);
 
         for(let i = y1; i < y2; ++i) {
-            if(i === open)     continue;
-            getCell(split-1, i).style.borderBottomWidth = wallWidth;
-            getCell(split, i).style.borderTopWidth = wallWidth;
+            if(i === open) {
+                getCell(split-1, i).style.borderBottomWidth = pathWidth;
+                getCell(split, i).style.borderTopWidth = pathWidth;
+            }
+            getCell(split-1, i).style.borderBottomColor = 'black';
+            getCell(split, i).style.borderTopColor = 'black';
             await new Promise(r => setTimeout(r, 10));
         }
 
@@ -35,9 +64,12 @@ export async function recursiveDivision(x1, y1, x2, y2) {
         let open = getRandom(x1, x2-1);
 
         for(let i = x1; i < x2; ++i) {
-            if(i === open)      continue;
-            getCell(i, split-1).style.borderRightWidth = wallWidth;
-            getCell(i, split).style.borderLeftWidth = wallWidth;
+            if(i === open){
+                getCell(i, split-1).style.borderRightWidth = pathWidth;
+                getCell(i, split).style.borderLeftWidth = pathWidth;    
+            }
+            getCell(i, split-1).style.borderRightColor = 'black';
+            getCell(i, split).style.borderLeftColor = 'black';
             await new Promise(r => setTimeout(r, 10));
         }
         

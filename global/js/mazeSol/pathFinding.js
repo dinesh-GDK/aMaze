@@ -1,4 +1,4 @@
-import {rows, cols, wallWidth, animation} from '../aMaze.js';
+import {rows, cols, pathWidth, animation} from '../index.js';
 import {getCell, plotPath} from '../helper.js';
 
 export async function pathFinding(algo) {
@@ -82,10 +82,10 @@ export async function pathFinding(algo) {
             return;
         }
 
-		let wallState = [currCell.style.borderBottomWidth !== wallWidth,
-                        currCell.style.borderRightWidth !== wallWidth,
-                        currCell.style.borderTopWidth !== wallWidth,
-                        currCell.style.borderLeftWidth !== wallWidth];
+		let wallState = [currCell.style.borderBottomWidth === pathWidth,
+                        currCell.style.borderRightWidth === pathWidth,
+                        currCell.style.borderTopWidth === pathWidth,
+                        currCell.style.borderLeftWidth === pathWidth];
                         
         for(let i = 0; i < 4; ++i) {
             let newX = node.x + dir[i][0];

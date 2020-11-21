@@ -1,7 +1,11 @@
-import {rows, cols, pathWidth} from '../aMaze.js';
-import {changePlayer, getCell, play, reset} from '../helper.js';
+import {rows, cols, pathWidth} from '../index.js';
+import {getCell, fullGrid, borderGrid} from '../helper.js';
 
 export async function prim() {
+
+    await borderGrid();
+    await fullGrid();
+    
     //             E       S        W        N
     const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]];
     
