@@ -1,5 +1,9 @@
 # aMaze!
 
+<p align="center">
+    <img src="global/images/entry.gif">
+</p>
+
 **aMaze** is a web application that comprises of a various maze generators as well as various maze solvers. You can create and solve the mazes by using the available algorithms or you can play and solve the mazes on your own.
 
 You can access the web application [here](https://dinesh-gdk.github.io/aMaze).
