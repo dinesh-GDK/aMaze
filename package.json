@@ -1,10 +1,10 @@
 {
   "name": "amaze",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Maze web app",
   "main": "aMaze.js",
   "scripts": {
-    "development": "webpack --mode=development --watch=true",
+    "development": "webpack --mode=development --watch",
     "production": "webpack --mode=production"
   },
   "author": "Dinesh Kumar Gnanasekaaran",
@@ -15,13 +15,14 @@
     "@babel/preset-env": "^7.12.1",
     "babel-loader": "^8.2.1",
     "file-loader": "^6.2.0",
-    "node-sass": "^4.14.1",
-    "sass-loader": "^10.1.0",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^12.1.0",
     "terser-webpack-plugin": "^5.0.3",
     "webpack": "^5.5.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^4.8.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5"
+    "@babel/runtime": "^7.12.5",
+    "npm-check-updates": "^11.8.5"
   }
 }

@@ -66,12 +66,16 @@ export async function kruskal() {
         if(dir === '0') {
             // horizontal
             getCell(pt1.x, pt1.y).style.borderRightWidth = pathWidth;
+            getCell(pt1.x, pt1.y).style.borderRightColor = 'gray';
             getCell(pt2.x, pt2.y).style.borderLeftWidth = pathWidth;
+            getCell(pt2.x, pt2.y).style.borderLeftColor = 'gray';
 
         } else {
             // vertical
             getCell(pt1.x, pt1.y).style.borderBottomWidth = pathWidth;
+            getCell(pt1.x, pt1.y).style.borderBottomColor = 'gray';
             getCell(pt2.x, pt2.y).style.borderTopWidth = pathWidth;
+            getCell(pt2.x, pt2.y).style.borderTopColor = 'gray';
 
         }
     }

@@ -107,8 +107,13 @@ async function solveMaze(algo) {
 }
 
 // at beginning
-// createMaze('prim');
 createMaze('recurse');
-document.getElementById('tut').click();
+
+window.onload = () => {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
 
 export {rows, cols, cellDim, pathWidth, animation};

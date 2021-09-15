@@ -4,10 +4,7 @@
         <title>aMaze</title>
         <link rel='icon' href='./global/images/icon.svg' type='image/ico'/>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <link rel='preconnect' href='https://fonts.gstatic.com'>
-        <link href='https://fonts.googleapis.com/css2?family=Ubuntu&display=swap' rel='stylesheet'>
         <link rel='stylesheet' href='./dist/bundle.css'>
-        <script src='./dist/bundle.js' defer></script>
     </head>
 
     <body>
@@ -30,35 +27,6 @@
                 <table id='maze'></table>
             </div>
 
-        </div>
-
-        <div id='new' class='overlay'>
-            <div class='popup'>
-                <h2>Choose an algorithm to create the maze</h2>
-                <a class='close' href='#'>&times;</a>
-                <div class='content'>
-                    <div class='pop-options'>
-                        <a type='button' class='pop-item' href='#' id='recurse'>Recursive Division</a>
-                        <a type='button' class='pop-item' href='#' id='kruskal'>Kruskal's Algorithm</a>
-                        <a type='button' class='pop-item' href='#' id='prim'>Prim's Algorithm</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id='solve' class='overlay'>
-            <div class='popup'>
-                <h2>Choose an algorithm to solve the maze</h2>
-                <a class='close' href='#'>&times;</a>
-                <div class='content'>
-                    <div class='pop-options'>
-                        <a type='button' class='pop-item' href='#' id='dfs'>Depth-First Search</a>
-                        <a type='button' class='pop-item' href='#' id='bfs'>Breadth-First Search</a>
-                        <a type='button' class='pop-item' href='#' id='dijkstra'>Dijkstra's Algorithm</a>
-                        <a type='button' class='pop-item' href='#' id='astar'>A* Search</a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div id='info' class='overlay'>
@@ -168,6 +136,35 @@
             </div>
         </div>
 
+        <div id='new' class='overlay'>
+            <div class='popup'>
+                <h2>Choose an algorithm to create the maze</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options'>
+                        <a type='button' class='pop-item' href='#' id='recurse'>Recursive Division</a>
+                        <a type='button' class='pop-item' href='#' id='kruskal'>Kruskal's Algorithm</a>
+                        <a type='button' class='pop-item' href='#' id='prim'>Prim's Algorithm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='solve' class='overlay'>
+            <div class='popup'>
+                <h2>Choose an algorithm to solve the maze</h2>
+                <a class='close' href='#'>&times;</a>
+                <div class='content'>
+                    <div class='pop-options'>
+                        <a type='button' class='pop-item' href='#' id='dfs'>Depth-First Search</a>
+                        <a type='button' class='pop-item' href='#' id='bfs'>Breadth-First Search</a>
+                        <a type='button' class='pop-item' href='#' id='dijkstra'>Dijkstra's Algorithm</a>
+                        <a type='button' class='pop-item' href='#' id='astar'>A* Search</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <a type='hidden' id='tReach' href='#reachMsg'></a>
         <div id='reachMsg' class='overlay'>
             <div class='popup'>
@@ -181,5 +178,6 @@
             </div>
         </div>
 
+        <script src='./dist/bundle.js' defer></script>
     </body>
 </html>

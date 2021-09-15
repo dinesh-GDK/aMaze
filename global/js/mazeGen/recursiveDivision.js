@@ -10,9 +10,9 @@ export async function recursiveDivision(x1, y1, x2, y2, border=false) {
             let c1 = getCell(x1, i).style;
             let c2 = getCell(x1, i+1).style;
             c1.borderRightWidth = pathWidth;
-            c1.borderRightColor = 'black';
+            c1.borderRightColor = 'gray';
             c2.borderLeftWidth = pathWidth;
-            c2.borderLeftColor = 'black';
+            c2.borderLeftColor = 'gary';
         }
         
         return;
@@ -23,9 +23,9 @@ export async function recursiveDivision(x1, y1, x2, y2, border=false) {
             let c1 = getCell(i, y1).style;
             let c2 = getCell(i+1, y1).style;
             c1.borderBottomWidth = pathWidth;
-            c1.borderBottomColor = 'black';
+            c1.borderBottomColor = 'gray';
             c2.borderTopWidth = pathWidth;
-            c2.borderTopColor = 'black';
+            c2.borderTopColor = 'gray';
         }
         
         return;
@@ -48,10 +48,13 @@ export async function recursiveDivision(x1, y1, x2, y2, border=false) {
         for(let i = y1; i < y2; ++i) {
             if(i === open) {
                 getCell(split-1, i).style.borderBottomWidth = pathWidth;
+                getCell(split-1, i).style.borderBottomColor = 'gray';
                 getCell(split, i).style.borderTopWidth = pathWidth;
+                getCell(split, i).style.borderTopColor = 'gray';
+            } else {
+                getCell(split-1, i).style.borderBottomColor = 'black';
+                getCell(split, i).style.borderTopColor = 'black';
             }
-            getCell(split-1, i).style.borderBottomColor = 'black';
-            getCell(split, i).style.borderTopColor = 'black';
             await new Promise(r => setTimeout(r, 10));
         }
 
@@ -66,10 +69,13 @@ export async function recursiveDivision(x1, y1, x2, y2, border=false) {
         for(let i = x1; i < x2; ++i) {
             if(i === open){
                 getCell(i, split-1).style.borderRightWidth = pathWidth;
+                getCell(i, split-1).style.borderRightColor = 'gray';
                 getCell(i, split).style.borderLeftWidth = pathWidth;    
+                getCell(i, split).style.borderLeftColor = 'gray';    
+            } else {
+                getCell(i, split-1).style.borderRightColor = 'black';
+                getCell(i, split).style.borderLeftColor = 'black';
             }
-            getCell(i, split-1).style.borderRightColor = 'black';
-            getCell(i, split).style.borderLeftColor = 'black';
             await new Promise(r => setTimeout(r, 10));
         }
         

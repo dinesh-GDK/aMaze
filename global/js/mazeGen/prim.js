@@ -57,18 +57,26 @@ export async function prim() {
         if(x === inGraphCell[0]) {
             if(y > inGraphCell[1]) {
                 getCell(x, y).style.borderLeftWidth = pathWidth;
+                getCell(x, y).style.borderLeftColor = 'gray';
                 getCell(x, y-1).style.borderRightWidth = pathWidth;
+                getCell(x, y-1).style.borderRightColor = 'gray';
             } else {
                 getCell(x, y).style.borderRightWidth = pathWidth;
+                getCell(x, y).style.borderRightColor = 'gray';
                 getCell(x, y+1).style.borderLeftWidth = pathWidth;
+                getCell(x, y+1).style.borderLeftColor = 'gray';
             }
         } else {
             if(x > inGraphCell[0]) {
                 getCell(x, y).style.borderTopWidth = pathWidth;
+                getCell(x, y).style.borderToptColor = 'gray';
                 getCell(x-1, y).style.borderBottomWidth = pathWidth;
+                getCell(x-1, y).style.borderBottomColor = 'gray';
             } else {
                 getCell(x, y).style.borderBottomWidth = pathWidth;
+                getCell(x, y).style.borderBottomColor = 'gray';
                 getCell(x+1, y).style.borderTopWidth = pathWidth;
+                getCell(x+1, y).style.borderTopColor = 'gray';
             }
         }
     }
